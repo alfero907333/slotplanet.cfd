@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+const SITE_NAME = import.meta.env.SITE_NAME || "Site Name";
+---
+
+<Layout
+  title={`${SITE_NAME} - DMCA Policy`}
+  description={`${SITE_NAME} - DMCA Policy`}
+  keywords={`${SITE_NAME}, ${SITE_NAME} dmca policy`}
+>
+  <div class="max-w-4xl mx-auto">
+    <div class="mx-3 prose max-w-none prose-invert p-8">
+      <div>
+        <h1>Contact</h1><p>
+          Email: admin@{
+            (Astro.site?.toString() || Astro.url.origin).replace(
+              /^https?:\/\//,
+              "",
+            )
+          }
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>

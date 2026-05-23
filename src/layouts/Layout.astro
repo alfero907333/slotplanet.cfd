@@ -1,0 +1,58 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/ui/Navbar.astro";
+import Footer from "../components/ui/Footer.astro";
+
+const SITE_NAME = import.meta.env.SITE_NAME || "SiteName";
+
+const {
+  title = "Astro Basics",
+  description = "Default site description",
+  keywords = "Astro app",
+} = Astro.props;
+
+const PUBLIC_BASE_URL = import.meta.env.PUBLIC_BASE_URL;
+
+const canonicalUrl = new URL(Astro.url.pathname, PUBLIC_BASE_URL);
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+    <meta name="robots" content="index,follow" />
+    <meta itemprop="description" name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="icon" type="image/jpg" href="/logo.jpg" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={SITE_NAME} />
+    <meta property="og:type" content="website" />
+    <meta name="msvalidate.01" content="BFFF0110E42A5E514F0526F2D5657C78" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image:alt" content={SITE_NAME} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:video" content={canonicalUrl} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={SITE_NAME} />
+    <meta name="twitter:site" content={SITE_NAME} />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta itemprop="image" content="/favicon.svg" />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta name="twitter:image" content="/favicon.svg" />
+  </head>
+  <body class="bg-gray-950 flex flex-col h-screen">
+    <Navbar />
+
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

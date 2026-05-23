@@ -1,0 +1,196 @@
+---
+import "../../../../../styles/global.css";
+
+const { eventId } = Astro.params;
+
+let data;
+
+// Fetch event data
+try {
+  const res = await fetch(
+    `https://spanelv2.andrhino.com/api/v2/schedule/${eventId}`,
+  );
+
+  if (res.status === 404) {
+    // Trigger Astro 404 page
+    throw new Response("Event not found", { status: 404 });
+  }
+
+  if (!res.ok) {
+    throw new Response(`API Error: ${res.status}`, { status: 500 });
+  }
+
+  data = await res.json();
+
+  if (!data.id) {
+    return new Response(null, { status: 404, statusText: "Not Found" });
+  }
+} catch (err: any) {
+  // Catch network errors or thrown Responses
+  if (err instanceof Response) throw err;
+  throw new Response(err.message, { status: 500 });
+}
+
+export const prerender = false;
+---
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sportsmurge</title>
+    <script is:inline type="text/javascript" data-cfasync="false">
+      /*<![CDATA[/* */
+      (function () {
+        var b = window,
+          k = "bc61ef70c29a1bbf363fe3fa57359042",
+          j = [
+            ["siteId", 551 * 423 - 685 * 883 + 5617455],
+            ["minBid", 0],
+            ["popundersPerIP", "0"],
+            ["delayBetween", 0],
+            ["default", false],
+            ["defaultPerDay", 0],
+            ["topmostLayer", "auto"],
+          ],
+          h = [
+            "d3d3LnZpc2FyaW9tZWRpYS5jb20vaWpzLWRhdGEtaHR0cC5taW4uY3Nz",
+            "ZDEzazdwcmF4MXlpMDQuY2xvdWRmcm9udC5uZXQvUm50eWRSL3JiaWdudW1iZXIubWluLmpz",
+            "d3d3LmNxaHl4ZG9nb2N3YXEuY29tL3Zqcy1kYXRhLWh0dHAubWluLmNzcw==",
+            "d3d3LmN0a2VrZXpranl6bWUuY29tL3FkL21iaWdudW1iZXIubWluLmpz",
+          ],
+          q = -1,
+          m,
+          i,
+          p = function () {
+            clearTimeout(i);
+            q++;
+            if (h[q] && !(1798296121000 < new Date().getTime() && 1 < q)) {
+              m = b.document.createElement("script");
+              m.type = "text/javascript";
+              m.async = !0;
+              var s = b.document.getElementsByTagName("script")[0];
+              m.src = "https://" + atob(h[q]);
+              m.crossOrigin = "anonymous";
+              m.onerror = p;
+              m.onload = function () {
+                clearTimeout(i);
+                b[k.slice(0, 16) + k.slice(0, 16)] || p();
+              };
+              i = setTimeout(p, 5e3);
+              s.parentNode.insertBefore(m, s);
+            }
+          };
+        if (!b[k]) {
+          try {
+            Object.freeze((b[k] = j));
+          } catch (e) {}
+          p();
+        }
+      })();
+      /*]]>/* */
+    </script>
+
+
+
+    <script async src="//waust.at/d.js"></script>
+  </head>
+  <body class="bg-neutral-950 flex flex-col items-center">
+    <main
+      class="max-w-375 my-6 grid grid-cols-12 gap-3 max-lg:grid-cols-1 mx-2"
+    >
+      <!-- Left Sidebar -->
+      <div
+        class="col-span-2 max-lg:col-span-12 flex justify-end items-start max-lg:justify-start"
+      >
+        <div class="bg-neutral-900 p-3 rounded">
+          <!-- <script is:inline>
+            atOptions = {
+              key: "48477921dfb524fca28c5e7b074f1f91",
+              format: "iframe",
+              height: 300,
+              width: 160,
+              params: {},
+            };
+          </script>
+          <script
+            src="https://www.highperformanceformat.com/48477921dfb524fca28c5e7b074f1f91/invoke.js"
+          ></script> -->
+        </div>
+      </div>
+
+      <!-- Main Content + Right Sidebar Wrapper -->
+      <div
+        class="col-span-10 max-lg:col-span-12 flex gap-4 min-w-0 max-lg:flex-col"
+      >
+        <!-- Main Content -->
+        <div class="flex-1 min-w-0 space-y-3">
+          <!-- Top Banner -->
+          <div class="p-3 bg-neutral-900 rounded flex justify-center">
+            <!-- <script is:inline>
+              atOptions = {
+                key: "a954a111d25596838b5159a716cdc01d",
+                format: "iframe",
+                height: 60,
+                width: 468,
+                params: {},
+              };
+            </script>
+            <script
+              src="https://www.highperformanceformat.com/a954a111d25596838b5159a716cdc01d/invoke.js"
+            ></script> -->
+          </div>
+
+          <!-- Video -->
+          <div
+            class="w-full p-3 bg-neutral-900 rounded [&>iframe]:aspect-video [&>iframe]:w-full [&>iframe]:h-auto"
+          >
+            <iframe
+              frameborder="0"
+              src={data.streams[0].stream_link}
+              allowfullscreen
+              scrolling="no"
+              allowtransparency="true"
+              class="rounded-lg shadow-lg"
+              id="player"></iframe>
+          </div>
+
+          <!-- Bottom Banner -->
+          <div class="p-3 bg-neutral-900 rounded flex justify-center">
+            <!-- <script is:inline>
+              atOptions = {
+                key: "4eb7b0c41d60e70de54d98e6fedfd898",
+                format: "iframe",
+                height: 50,
+                width: 320,
+                params: {},
+              };
+            </script>
+            <script
+              src="https://www.highperformanceformat.com/4eb7b0c41d60e70de54d98e6fedfd898/invoke.js"
+            ></script> -->
+          </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="shrink-0 max-lg:flex">
+          <div class="bg-neutral-900 p-3 rounded">
+            <!-- <script is:inline>
+              atOptions = {
+                key: "e48c9789a9514b5d78a442e9a7717089",
+                format: "iframe",
+                height: 250,
+                width: 300,
+                params: {},
+              };
+            </script>
+            <script
+              src="https://www.highperformanceformat.com/e48c9789a9514b5d78a442e9a7717089/invoke.js"
+            ></script> -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

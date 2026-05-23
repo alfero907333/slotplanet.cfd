@@ -1,0 +1,252 @@
+---
+import Layout from "../layouts/Layout.astro";
+import slugify from "../utils/slugify";
+
+
+const res = await fetch(`https://spanelv2.andrhino.com/api/v2/appscheduleapi`);
+
+
+
+
+const data = await res.json()
+
+
+const sportsData = data[0].schedule
+
+const soccer = sportsData.filter((sportObj: any)=> sportObj.sport_id === 3 )
+
+
+
+const SHOW_ADS = import.meta.env.SHOW_ADS === "true";
+
+export const prerender = false;
+---
+
+<Layout
+title="Soccer100 | Live Soccer Streams & Football Schedules"
+description="Get free access to high-quality soccer streams on Soccer100. Follow daily live football match schedules, team stats, and leagues without interruption."
+keywords="soccer100, soccer streams, live soccer streams, watch soccer online, football streams, free soccer streaming" >
+
+  <div class="mx-auto mb-4 max-w-4xl">
+    <div class="mx-3 space-y-8">
+      <div class="relative overflow-hidden rounded-md bg-gray-900 p-8 mb-8">
+<h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
+Soccer100 | Ultimate Live Soccer Streams & Schedules
+</h1>
+
+<p class="text-white mt-3 ">
+Welcome to <strong>Soccer100</strong>, your go-to hub for high-quality <strong>soccer streams</strong> and live match schedules. Track your favorite football clubs, leagues, and tournaments with ease, ensuring you never miss a kickoff.
+</p>
+
+<p class="text-white mt-3 ">
+Whether you are looking for Premier League, Champions League, La Liga, or international fixtures, <strong>Soccer100</strong> provides reliable updates and stable streams optimized for desktop, mobile, and tablet viewing.
+</p>
+      </div>
+
+
+ {
+        SHOW_ADS && (
+      <div
+        id="right-ad"
+        class="md:fixed md:top-1/3 md:right-4 pointer-events-auto"
+      >
+        <!-- Close Button -->
+        <button
+          class="absolute -top-2 -right-2 bg-red-500 rounded-full p-1 z-10 max-md:hidden"
+          onclick="document.getElementById('right-ad').style.display='none'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#fff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6l-12 12"></path>
+            <path d="M6 6l12 12"></path>
+          </svg>
+        </button>
+
+        <!-- Ad Script -->
+<script is:inline>
+  atOptions = {
+    'key' : 'e48c9789a9514b5d78a442e9a7717089',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script is:inline src="https://www.highperformanceformat.com/e48c9789a9514b5d78a442e9a7717089/invoke.js"></script>
+      </div>
+
+      <div
+        id="left-ad"
+        class="md:fixed md:top-1/3 md:left-4 pointer-events-auto"
+      >
+        <!-- Close Button -->
+        <button
+          class="absolute -top-2 -right-2 bg-red-500 rounded-full p-1 z-10 max-md:hidden"
+          onclick="document.getElementById('left-ad').style.display='none'"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#fff"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6l-12 12"></path>
+            <path d="M6 6l12 12"></path>
+          </svg>
+        </button>
+
+        <!-- Ad Script -->
+<script is:inline>
+  atOptions = {
+    'key' : 'e48c9789a9514b5d78a442e9a7717089',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script is:inline src="https://www.highperformanceformat.com/e48c9789a9514b5d78a442e9a7717089/invoke.js"></script>
+      </div>
+        )
+      }
+
+
+<div class="bg-gray-900 rounded-md p-3">
+      {
+        soccer.map((sport : any) => {
+          if (sport.league_schedule.length !== 0)
+            return (
+              <div class="text-xl font-semibold">
+             
+
+<div class="space-y-3 mt-4">
+  {sport.league_schedule.map((event: any) => {
+    const home = event.strHomeTeam;
+    const away = event.strAwayTeam;
+
+    return (
+      <a
+        href={`/live/${slugify(sport.sport)}/${slugify(`${event.teams}`)}/${event.sch_id}/`}
+        class="group grid grid-cols-3 items-center bg-gray-800 rounded-md px-4 py-3"
+      >
+        {/* LEFT TEAM */}
+        <div class="flex items-center gap-3">
+          <img
+            src={event.sch_home_logo}
+            alt={home}
+            class="w-10 h-10 object-contain"
+          />
+          <span class="text-white font-semibold text-sm">
+            {home}
+          </span>
+        </div>
+
+        {/* CENTER */}
+        <div class="flex flex-col items-center text-center">
+          <span class="text-xs text-gray-300 uppercase">
+            {event.sch_league.toUpperCase()}
+          </span>
+
+          <span class="text-lg font-bold text-white">
+           {event.event_time} 
+          </span>
+
+          <span class="text-xs text-gray-300">
+            {event.event_date}
+          </span>
+        </div>
+
+        {/* RIGHT TEAM */}
+        <div class="flex items-center justify-end gap-3 text-right">
+          <span class="text-white font-semibold text-sm">
+            {away}
+          </span>
+          <img
+            src={event.sch_away_logo}
+            alt={away}
+            class="w-10 h-10 object-contain"
+          />
+        </div>
+      </a>
+    );
+  })}
+</div>
+              </div>
+            );
+        })
+      }
+
+      </div>
+
+
+
+      <div class="prose prose-invert max-w-none rounded-lg bg-gray-900 p-4">
+        <div>
+          <h2>Your Premier Destination for Soccer Streams on Soccer100</h2>
+          <p>
+            For avid football fans across the globe, finding reliable <strong>soccer streams</strong> and real-time match schedules is essential. <strong>Soccer100</strong> has established itself as the ultimate platform to monitor game timetables, league standings, and live broadcast details. We aggregate active schedules and match statistics for every major football league, ensuring you stay connected to the beautiful game.
+          </p>
+          
+          <h2>Why Choose Soccer100 for Live Match Schedules?</h2>
+          <p>
+            Navigating through scattered online schedules can be exhausting. <strong>Soccer100</strong> simplifies this experience by offering a modern, clean, and highly responsive user interface. We provide updated kickoff times, team line-ups, and live stream options so you can plan your football viewing experience without hassle.
+          </p>
+          
+          <h3>Comprehensive Coverage of Elite Football Leagues</h3>
+          <p>
+            No matter which domestic league or continental tournament you follow, Soccer100 keeps you covered:
+          </p>
+          <ul>
+            <li><strong>English Premier League:</strong> Follow every fixture from the world's most competitive football league.</li>
+            <li><strong>UEFA Champions League:</strong> Track mid-week European clashes and high-stakes knockout games.</li>
+            <li><strong>La Liga & Serie A:</strong> Stay updated on matches featuring top Spanish and Italian clubs.</li>
+            <li><strong>International Tournaments:</strong> Stay tuned for World Cup qualifiers, Euros, and Copa América schedules.</li>
+          </ul>
+          
+          <h3>Seamless Viewing Across All Devices</h3>
+          <p>
+            Our web platform is fully optimized to deliver a premium viewing experience on any screen. Whether you are using a smartphone, a tablet, or a desktop computer, you can easily access <strong>Soccer100</strong>'s live schedules and streams on the go without installing extra plugins or software.
+          </p>
+          
+          <h2>Soccer100 & Soccer Streams FAQs</h2>
+          
+          <h3>How does Soccer100 help me watch live matches?</h3>
+          <p>
+            <strong>Soccer100</strong> lists up-to-date kick-off times, match coverage, and direct access to high-quality soccer streams, helping you find active broadcast links for all major tournaments.
+          </p>
+          
+          <h3>Is there a cost to access schedules and stream links on Soccer100?</h3>
+          <p>
+            No, <strong>Soccer100</strong> is completely free. We do not require registration or premium subscriptions to view our schedules and match updates.
+          </p>
+          
+          <h3>How often are the match schedules updated?</h3>
+          <p>
+            We refresh our fixtures and broadcast schedule in real-time. Any dynamic timing adjustments made by the official football leagues are reflected instantly.
+          </p>
+          
+          <h3>What should I do if a stream fails to load?</h3>
+          <p>
+            If a stream lags or fails, we recommend checking your internet connection or refreshing the Soccer100 homepage to load alternative active streaming links.
+          </p>
+        </div>
+      </div>
+
+  
+    </div>
+  </div>
+</Layout>

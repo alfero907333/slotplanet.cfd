@@ -1,0 +1,90 @@
+---
+import Layout from "../layouts/Layout.astro";
+const SITE_NAME = import.meta.env.SITE_NAME || "Site Name";
+
+---
+
+<Layout
+  title={`${SITE_NAME} - DMCA Policy`}
+  description={`${SITE_NAME} - DMCA Policy`}
+  keywords={`${SITE_NAME}, ${SITE_NAME} dmca policy`}
+>
+  <div class="max-w-4xl mx-auto">
+    <div class="mx-3 prose max-w-none prose-invert p-8">
+      <div>
+        <h1>DMCA Policy</h1>
+        <p>
+          This page outlines our approach to copyright concerns in accordance
+          with the Digital Millennium Copyright Act (DMCA).
+        </p>
+
+        <h2>Copyright Notice</h2>
+        <p>
+          We respect the intellectual property rights of others and expect users
+          to do the same. Our website provides scheduling information and links
+          to third-party streaming platforms. We do not host, upload, or control
+          any video content available on external websites.
+        </p>
+
+        <h2>No Content Hosting</h2>
+        <p>
+          This platform գործում as a directory and aggregator of publicly
+          available links. All streaming content is hosted and managed by
+          independent third-party providers. We do not store, transmit, or
+          manage any copyrighted media on our servers.
+        </p>
+
+        <h2>DMCA Takedown Requests</h2>
+        <p>
+          If you believe that content linked on our website infringes your
+          copyright, we recommend contacting the hosting provider directly, as
+          they control the actual content. However, if you believe there is a
+          valid concern related to our website, please include the following
+          details in your request:
+        </p>
+        <ul>
+          <li>Your full name, address, phone number, and email address</li>
+          <li>A clear description of the copyrighted work in question</li>
+          <li>
+            The exact URL or location on our site where the material appears
+          </li>
+          <li>
+            A statement confirming your good faith belief that the use is
+            unauthorized
+          </li>
+          <li>
+            A declaration that the information provided is accurate, under
+            penalty of perjury
+          </li>
+          <li>
+            Your physical or electronic signature (as the copyright owner or
+            authorized agent)
+          </li>
+        </ul>
+
+        <h2>Counter-Notification</h2>
+        <p>
+          If you believe that content was removed or disabled by mistake, you
+          may submit a counter-notification. This should include your contact
+          details, identification of the affected content, a statement of good
+          faith belief that the removal was in error, consent to jurisdiction,
+          and your signature.
+        </p>
+
+        <h2>Repeat Infringers</h2>
+        <p>
+          We reserve the right to restrict or terminate access for users who
+          repeatedly violate copyright policies. Additionally, links to external
+          sources reported and verified as infringing may be removed from our
+          directory.
+        </p>
+
+        <h2>DMCA Contact</h2>
+        <p>
+          To submit a DMCA notice or inquiry, please use our contact page and
+          include “DMCA Notice” in the subject line to ensure proper handling.
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>

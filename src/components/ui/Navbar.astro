@@ -1,0 +1,19 @@
+---
+// Navbar.astro
+const SITE_NAME = import.meta.env.SITE_NAME || "Site Name";
+
+const PUBLIC_BASE_URL = import.meta.env.PUBLIC_BASE_URL || "Site Name";
+---
+
+<nav class="bg-gray-900 w-full min-h-14 mb-4">
+  <div class="mx-3 h-full">
+    <div class="mx-auto max-w-4xl flex items-center justify-between h-full">
+      <a
+        href="/"
+        class="text-white text-xl font-bold bg-gray-700 p-2 rounded-md"
+      >
+        {SITE_NAME}
+      </a>
+    </div>
+  </div>
+</nav>

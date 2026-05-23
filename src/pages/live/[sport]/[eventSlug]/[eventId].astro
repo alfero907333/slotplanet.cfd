@@ -1,0 +1,158 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+import moment from "moment-timezone";
+
+const { eventSlug, eventId } = Astro.params;
+const API = import.meta.env.API;
+const SITE_NAME = import.meta.env.SITE_NAME;
+
+let data;
+
+// Fetch event data
+try {
+  const res = await fetch(
+    `https://spanelv2.andrhino.com/api/v2/schedule/${eventId}`,
+  );
+
+  if (res.status === 404) {
+    // Trigger Astro 404 page
+    throw new Response("Event not found", { status: 404 });
+  }
+
+  if (!res.ok) {
+    throw new Response(`API Error: ${res.status}`, { status: 500 });
+  }
+
+  data = await res.json();
+
+  if (!data.id) {
+    return new Response(null, { status: 404, statusText: "Not Found" });
+  }
+} catch (err: any) {
+  // Catch network errors or thrown Responses
+  if (err instanceof Response) throw err;
+  throw new Response(err.message, { status: 500 });
+}
+
+// return new Response(null, { status: 404, statusText: 'Not Found' });
+
+const {
+  date_time,
+  league,
+  strHomeTeam,
+  strAwayTeam,
+  title,
+  frames,
+  teams,
+  event_date_time,
+} = data;
+
+export const prerender = false;
+---
+
+<Layout
+  title={`${strHomeTeam} vs ${strAwayTeam} Stream | Soccer100`}
+  description={`Watch ${strHomeTeam} vs ${strAwayTeam} live soccer streams on Soccer100. Get kickoff times, live schedules, and league updates.`}
+  keywords="soccer100, soccer streams, live soccer streams, watch soccer online, football streams"
+>
+  <div class="pt-10 px-4 max-w-3xl mx-auto">
+    <div
+      class="space-y-6 text-center relative p-6 sm:p-8 rounded-xl bg-gray-900"
+    >
+      <!-- Page Title -->
+      <div
+        class="text-2xl sm:text-3xl md:text-4xl font-bold text-white animate-fadeIn wrap-break-word"
+      >
+        {teams}
+      </div>
+
+      <!-- League and Date Info -->
+      <div
+        class="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-3 text-sm text-neutral-200 mt-2 animate-fadeIn"
+      >
+        <span class="px-3 py-1 rounded-full bg-white font-semibold text-black"
+          >{league}</span
+        >
+        <span class="sm:ml-2">
+          • {event_date_time} ET
+        </span>
+      </div>
+
+      <div class="flex justify-center w-full mt-10">
+        <a
+          href="play"
+          rel="nofollow"
+          class="inline-block w-full! sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-black font-bold rounded-lg text-lg transition-transform transform shadow-lg"
+        >
+          Live
+        </a>
+      </div>
+
+      <div class="prose prose-invert max-w-none">
+        <h1>Watch {teams} Live on Soccer100</h1>
+
+        <p>
+          Get ready for the highly anticipated clash between <strong>{teams}</strong> in the {league}. Both teams are gearing up to deliver one of the most exciting matches of this round, scheduled for {event_date_time}. If you are searching for high-quality <strong>soccer streams</strong>, <strong>Soccer100</strong> is your ultimate destination to follow this match live and stay updated with real-time coverage.
+        </p>
+
+        <h2>
+          {teams} Match Preview
+        </h2>
+
+        <p>
+          All eyes are on this crucial fixture between {strHomeTeam} and {
+            strAwayTeam
+          }. As both sides take the field, their goal is to secure three vital points in the {league} standings. Fans around the world are looking forward to stable and fast soccer streams to catch every second of the action.
+        </p>
+
+        <p>
+          {strHomeTeam} aims to take full advantage of their current form and command the flow of play, while {strAwayTeam} is determined to challenge their opponents with a strong, cohesive performance on the pitch.
+        </p>
+
+        <h2>
+          {teams} Match Information Card
+        </h2>
+        <table class="w-full border border-gray-800 text-left text-sm">
+          <tbody>
+            <tr class="border-b">
+              <th class="p-3 font-semibold border-e border-gray-800">League / Tournament</th>
+              <td class="p-3">{league}</td>
+            </tr>
+            <tr class="border-b">
+              <th class="p-3 font-semibold border-e border-gray-800"
+                >Matchup</th
+              >
+              <td class="p-3">{strHomeTeam} vs {strAwayTeam}</td>
+            </tr>
+            <tr class="border-b">
+              <th class="p-3 font-semibold border-e border-gray-800"
+                >Kickoff Time</th
+              >
+              <td class="p-3">{event_date_time} ET</td>
+            </tr>
+            <tr>
+              <th class="p-3 font-semibold border-e border-gray-800">Live Coverage</th>
+              <td class="p-3">Available on Soccer100</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Tactical Match Analysis</h2>
+
+        <p>
+          A thrilling encounter is on the horizon. {strHomeTeam} comes into this fixture looking to establish early dominance through quick offensive transitions and ball possession. Their attacking threats will test the opponents' defense from the start.
+        </p>
+
+        <p>
+          On the other hand, {strAwayTeam} is expected to deploy an organized tactical structure, utilizing quick counter-attacks to exploit spaces in transition and secure a positive result away from home.
+        </p>
+
+        <h2>Why Follow the Match on Soccer100?</h2>
+
+        <p>
+          At <strong>Soccer100</strong>, we are committed to providing soccer fans with reliable schedules and the best available <strong>soccer streams</strong>. Our clean and responsive web layout ensures that you can follow live scores and matches on your mobile, tablet, or desktop smoothly and without interruption.
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>
