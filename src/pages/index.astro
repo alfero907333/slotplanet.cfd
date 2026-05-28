@@ -3,17 +3,25 @@ import Layout from "../layouts/Layout.astro";
 import slugify from "../utils/slugify";
 
 
-const res = await fetch(`https://spanelv2.andrhino.com/api/v2/appscheduleapi`);
-
-
-
-
-const data = await res.json()
-
-
-const sportsData = data[0].schedule
-
-const soccer = sportsData.filter((sportObj: any)=> sportObj.sport_id === 3 )
+let allSports = [];
+try {
+  const res = await fetch(`https://spanelv2.andrhino.com/api/v2/appscheduleapi`);
+  if (res.ok) {
+    const data = await res.json();
+    const sportsData = data[0].schedule;
+    
+    // Move Soccer (sport_id 3) to the top
+    const soccerIdx = sportsData.findIndex((s: any) => s.sport_id === 3);
+    if (soccerIdx > -1) {
+      const soccer = sportsData.splice(soccerIdx, 1)[0];
+      allSports = [soccer, ...sportsData];
+    } else {
+      allSports = sportsData;
+    }
+  }
+} catch (error) {
+  console.error("Error fetching schedule:", error);
+}
 
 
 
@@ -23,24 +31,31 @@ export const prerender = false;
 ---
 
 <Layout
-title="Soccer100 | Live Soccer Streams & Football Schedules"
-description="Get free access to high-quality soccer streams on Soccer100. Follow daily live football match schedules, team stats, and leagues without interruption."
-keywords="soccer100, soccer streams, live soccer streams, watch soccer online, football streams, free soccer streaming" >
+title="Soccer100 – Free Live Soccer Streams Online"
+description="Soccer100 brings you free live soccer streams for every major league. Watch HD football matches, real-time scores & schedules with no subscription required."
+keywords="soccer100, soccer streams" >
 
   <div class="mx-auto mb-4 max-w-4xl">
     <div class="mx-3 space-y-8">
-      <div class="relative overflow-hidden rounded-md bg-gray-900 p-8 mb-8">
-<h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
-Soccer100 | Ultimate Live Soccer Streams & Schedules
-</h1>
+      <div class="relative overflow-hidden rounded-md bg-transparent text-center pt-8 mb-8">
+        
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight theme-text-primary leading-tight">
+          <span class="text-[#f3a833]">Soccer100</span>
+          <br/>
+          Free Live Soccer Streams & Match Schedules
+        </h1>
 
-<p class="text-white mt-3 ">
-Welcome to <strong>Soccer100</strong>, your go-to hub for high-quality <strong>soccer streams</strong> and live match schedules. Track your favorite football clubs, leagues, and tournaments with ease, ensuring you never miss a kickoff.
-</p>
+        <p class="theme-text-secondary mt-6 max-w-2xl mx-auto text-lg opacity-90">
+          Welcome to Soccer100, your premier source for high-quality soccer streams and real-time football updates. Follow every major league and tournament live without any subscription fees.
+        </p>
 
-<p class="text-white mt-3 ">
-Whether you are looking for Premier League, Champions League, La Liga, or international fixtures, <strong>Soccer100</strong> provides reliable updates and stable streams optimized for desktop, mobile, and tablet viewing.
-</p>
+        <div class="flex flex-wrap justify-center gap-3 mt-8">
+          {["HD Quality", "100% Free", "No Subscription", "Mobile Friendly", "+50 Leagues"].map(feature => (
+            <div class="flex items-center gap-2 theme-card border px-4 py-2 rounded-full text-sm font-medium shadow-sm">
+              <span class="text-[#f3a833]">✓</span> {feature}
+            </div>
+          ))}
+        </div>
       </div>
 
 
@@ -125,60 +140,88 @@ Whether you are looking for Premier League, Champions League, La Liga, or intern
       }
 
 
-<div class="bg-gray-900 rounded-md p-3">
+<div class="theme-card rounded-xl p-4 shadow-xl border backdrop-blur-sm">
+      <div id="no-matches-found" class="hidden py-10 text-center theme-text-secondary">
+        <div class="text-4xl mb-4">🔍</div>
+        <p class="text-lg font-bold">No matches found for your search.</p>
+        <p class="text-sm">Try searching for a different team or league.</p>
+      </div>
       {
-        soccer.map((sport : any) => {
+        allSports.map((sport : any) => {
           if (sport.league_schedule.length !== 0)
             return (
-              <div class="text-xl font-semibold">
+              <div class="mb-12 last:mb-0 sport-section" id={slugify(sport.sport)}>
+                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-2">
+                  <h2 class="text-2xl font-black theme-text-primary uppercase tracking-wider">
+                    {sport.sport}
+                  </h2>
+                  <span class="bg-[#f3a833] text-black text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">
+                    Live
+                  </span>
+                </div>
              
 
-<div class="space-y-3 mt-4">
+<div class="space-y-4 mt-2">
   {sport.league_schedule.map((event: any) => {
     const home = event.strHomeTeam;
     const away = event.strAwayTeam;
 
+    // Basic translations for time, date, and sports terms
+    const translateSportsData = (str: string) => {
+      if (!str) return str;
+      
+      let translated = str;
+      
+      // Keep everything in English
+      return translated;
+    };
+
     return (
       <a
         href={`/live/${slugify(sport.sport)}/${slugify(`${event.teams}`)}/${event.sch_id}/`}
-        class="group grid grid-cols-3 items-center bg-gray-800 rounded-md px-4 py-3"
+        class="group grid grid-cols-3 items-center theme-card theme-card-hover transition-all duration-300 rounded-lg px-4 py-4 border shadow-md match-card"
+        data-search={`${home} ${away} ${event.sch_league}`.toLowerCase()}
       >
         {/* LEFT TEAM */}
         <div class="flex items-center gap-3">
           <img
             src={event.sch_home_logo}
-            alt={home}
-            class="w-10 h-10 object-contain"
+            alt={translateSportsData(home)}
+            class="w-12 h-12 object-contain drop-shadow-md"
+            loading="lazy"
+            decoding="async"
           />
-          <span class="text-white font-semibold text-sm">
-            {home}
+          <span class="theme-text-primary font-bold text-base sm:text-lg tracking-wide">
+            {translateSportsData(home)}
           </span>
         </div>
 
         {/* CENTER */}
         <div class="flex flex-col items-center text-center">
-          <span class="text-xs text-gray-300 uppercase">
-            {event.sch_league.toUpperCase()}
+          <span class="text-[10px] sm:text-xs text-[#f3a833] font-black uppercase tracking-[0.2em] mb-1">
+            {translateSportsData(event.sch_league)}
           </span>
 
-          <span class="text-lg font-bold text-white">
-           {event.event_time} 
+          <span class="text-xl sm:text-2xl font-black theme-text-primary">
+           {translateSportsData(event.event_time)} 
           </span>
 
-          <span class="text-xs text-gray-300">
-            {event.event_date}
+          <span class="text-[10px] sm:text-xs theme-text-secondary font-medium">
+            {translateSportsData(event.event_date)}
           </span>
         </div>
 
         {/* RIGHT TEAM */}
         <div class="flex items-center justify-end gap-3 text-right">
-          <span class="text-white font-semibold text-sm">
-            {away}
+          <span class="theme-text-primary font-bold text-base sm:text-lg tracking-wide">
+            {translateSportsData(away)}
           </span>
           <img
             src={event.sch_away_logo}
-            alt={away}
-            class="w-10 h-10 object-contain"
+            alt={translateSportsData(away)}
+            class="w-12 h-12 object-contain drop-shadow-md"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </a>
@@ -192,61 +235,326 @@ Whether you are looking for Premier League, Champions League, La Liga, or intern
 
       </div>
 
+      <!-- Guide Section -->
+      <div class="theme-card rounded-xl p-6 border shadow-lg backdrop-blur-sm">
+        <div class="theme-card p-6 rounded-lg mb-8 shadow-inner border">
+          <h3 class="flex items-center gap-2 font-bold text-xl mb-4 border-b border-white/10 pb-2 theme-text-primary">
+            📌 Soccer100 — Complete Guide to Free Soccer Streams
+          </h3>
+          <ul class="space-y-3 text-sm md:text-base font-medium theme-text-primary">
+            <li>1. <a href="#about" class="hover:text-[#f3a833] transition-colors">What is Soccer100?</a></li>
+            <li>2. <a href="#features" class="hover:text-[#f3a833] transition-colors">Key Features of Soccer100 Streams</a></li>
+            <li>3. <a href="#leagues" class="hover:text-[#f3a833] transition-colors">Leagues & Tournaments Covered</a></li>
+            <li>4. <a href="#how-to-watch" class="hover:text-[#f3a833] transition-colors">How to Watch Soccer Streams Free</a></li>
+            <li>5. <a href="#faq" class="hover:text-[#f3a833] transition-colors">Frequently Asked Questions</a></li>
+          </ul>
+        </div>
 
+        <div class="prose max-w-none theme-text-primary">
+          <p class="text-lg leading-relaxed mb-6">
+            In a world where live football coverage is locked behind expensive paywalls, <strong>Soccer100</strong> stands apart as the go-to destination for fans who want premium-quality <strong>soccer streams</strong> without paying a single cent. Built around the passion for the beautiful game, Soccer100 delivers fast, reliable, and high-definition streams to millions of fans worldwide — every single day.
+          </p>
+          <p class="text-lg leading-relaxed mb-10">
+            Whether you're catching a Premier League thriller on a weekday evening or streaming a Champions League final on the biggest night of the football calendar, <strong>Soccer100</strong> ensures you never miss a moment. Our platform aggregates the best <strong>soccer streams</strong> available and presents them in a clean, easy-to-navigate interface with zero registration required.
+          </p>
 
-      <div class="prose prose-invert max-w-none rounded-lg bg-gray-900 p-4">
+          <h2 id="about" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6">
+            1. What is Soccer100?
+          </h2>
+          <p class="mb-4 leading-relaxed">
+            <strong>Soccer100</strong> is a free live football streaming hub that collects and displays the best available <strong>soccer streams</strong> for matches happening around the globe. Unlike generic sports sites, Soccer100 is built exclusively for football fans — every feature, every link, and every update is focused on delivering the most seamless match-watching experience possible.
+          </p>
+          <p class="leading-relaxed">
+            What truly sets <strong>Soccer100</strong> apart is reliability. Every match listing includes multiple streaming mirrors, so if one link drops mid-game, you can switch instantly without losing the action. Our dedicated team monitors streams in real-time to keep the platform accurate and up-to-date at all times.
+          </p>
+
+          <div class="theme-card p-5 rounded-lg my-8 border-l-4 border-[#f3a833] shadow-sm">
+            <p class="font-bold leading-relaxed">
+              <span class="text-[#f3a833]">⚡ Quick Tip:</span> Bookmark <span class="text-[#f3a833]">Soccer100</span> now so you always have direct access to the latest working <span class="text-[#f3a833]">soccer streams</span> — especially during major tournaments when demand is highest.
+            </p>
+          </div>
+
+          <h2 id="features" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6 mt-16">
+            2. Key Features of Soccer100 Soccer Streams
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
+              <h4 class="font-black text-lg mb-2 text-[#f3a833]">🚀 Zero Buffering Streams</h4>
+              <p class="text-sm theme-text-secondary leading-relaxed">Soccer100 uses CDN-powered servers to deliver smooth, lag-free soccer streams even during peak match times and high traffic loads.</p>
+            </div>
+            
+            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
+              <h4 class="font-black text-lg mb-2 text-[#f3a833]">📺 HD & 4K Quality</h4>
+              <p class="text-sm theme-text-secondary leading-relaxed">Enjoy soccer streams in 720p, 1080p, and 4K resolution. Soccer100 adapts stream quality based on your internet speed for the best possible picture.</p>
+            </div>
+
+            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
+              <h4 class="font-black text-lg mb-2 text-[#f3a833]">📱 Any Device, Anywhere</h4>
+              <p class="text-sm theme-text-secondary leading-relaxed">From iPhone to Android, tablet to smart TV, Soccer100 soccer streams work perfectly on every device without installing any app.</p>
+            </div>
+
+            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
+              <h4 class="font-black text-lg mb-2 text-[#f3a833]">🔄 Multiple Backup Links</h4>
+              <p class="text-sm theme-text-secondary leading-relaxed">Every match on Soccer100 includes several streaming mirrors. If one source fails, switch instantly to keep watching without interruption.</p>
+            </div>
+
+            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
+              <h4 class="font-black text-lg mb-2 text-[#f3a833]">📊 Real-Time Scores</h4>
+              <p class="text-sm theme-text-secondary leading-relaxed">Follow live goals, cards, and stats alongside your soccer streams on Soccer100 to stay fully in control of the action.</p>
+            </div>
+
+            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
+              <h4 class="font-black text-lg mb-2 text-[#f3a833]">🔓 Truly 100% Free</h4>
+              <p class="text-sm theme-text-secondary leading-relaxed">No account creation, no payment details, no hidden fees. Soccer100 gives you full access to all soccer streams completely free of charge.</p>
+            </div>
+          </div>
+
+          <h2 id="leagues" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6 mt-16">
+            3. Leagues & Tournaments on Soccer100
+          </h2>
+          <p class="text-lg leading-relaxed mb-6">
+            <strong>Soccer100</strong> covers the widest range of football competitions of any free streaming site. Whether you follow a top-five European league or a regional cup, our <strong>soccer streams</strong> have you covered with live and scheduled match access.
+          </p>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8 theme-text-primary font-bold text-center">
+            {[
+              {name: "Premier League", icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+              {name: "La Liga", icon: "🇪🇸"},
+              {name: "Bundesliga", icon: "🇩🇪"},
+              {name: "Serie A", icon: "🇮🇹"},
+              {name: "Ligue 1", icon: "🇫🇷"},
+              {name: "Champions League", icon: "🏆"},
+              {name: "Europa League", icon: "🏅"},
+              {name: "FIFA World Cup", icon: "🌍"},
+              {name: "Saudi Pro League", icon: "🇸🇦"},
+              {name: "Egyptian League", icon: "🇪🇬"},
+              {name: "Moroccan BOTOLA", icon: "🇲🇦"},
+              {name: "Africa Cup", icon: "🌍"},
+              {name: "MLS", icon: "🇺🇸"},
+              {name: "Copa America", icon: "🌎"},
+              {name: "Euro Championship", icon: "🇪🇺"},
+              {name: "World Cup Qualifiers", icon: "⚽"}
+            ].map(item => (
+              <div class="theme-card p-4 rounded-xl shadow-md border border-white/10 flex items-center justify-center gap-2 hover:shadow-lg transition-shadow">
+                {item.icon} {item.name}
+              </div>
+            ))}
+          </div>
+
+          <p class="text-base leading-relaxed mb-12 theme-text-secondary">
+            Can't find your league? Soccer100 also streams lower-division fixtures, friendly matches, and international youth tournaments — making it the most complete <strong>soccer streams</strong> platform online.
+          </p>
+
+          <h2 id="how-to-watch" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6 mt-16">
+            4. How to Watch Soccer Streams on Soccer100 — Step by Step
+          </h2>
+          <p class="text-lg mb-8">Getting started on Soccer100 takes less than a minute. No sign-up, no download — just click and watch:</p>
+          
+          <div class="space-y-4 mb-16 theme-text-primary">
+            {[
+              {step: "1", title: "Visit Soccer100", desc: "Open your browser and navigate to Soccer100. The homepage loads instantly with today's full match schedule."},
+              {step: "2", title: "Browse Today's Matches", desc: "All live and upcoming fixtures are listed with kickoff times, team names, league badges, and logos."},
+              {step: "3", title: "Pick Your Match", desc: "Click any match card to open the dedicated event page with all available soccer streams listed clearly."},
+              {step: "4", title: "Select a Stream", desc: "Tap any stream link to start watching immediately. Multiple backup links are provided so you never get stuck."},
+              {step: "5", title: "Enjoy in HD", desc: "Sit back and enjoy crystal-clear soccer streams on Soccer100 — optimized for both mobile and desktop."}
+            ].map(item => (
+              <div class="theme-card p-5 rounded-xl shadow-md border border-white/10 flex items-center gap-4 text-left">
+                <div class="bg-[#f3a833] text-black w-10 h-10 rounded-full flex items-center justify-center font-black shrink-0">
+                  {item.step}
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-black text-lg mb-1">{item.title} — <span class="theme-text-secondary font-medium text-sm">{item.desc}</span></h4>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h2 id="faq" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6 mt-16">
+            5. Frequently Asked Questions About Soccer100
+          </h2>
+          <div class="space-y-4 mb-16">
+            {[
+              {
+                q: "Is Soccer100 completely free to use?",
+                a: "Yes. Soccer100 is 100% free with no registration, no credit card, and no subscription required. Every soccer stream on our platform is accessible at zero cost."
+              },
+              {
+                q: "What makes Soccer100 better than other soccer streams sites?",
+                a: "Soccer100 offers multiple backup links per match, real-time score updates, a clean mobile-friendly interface, and the widest league coverage available on any free streaming platform — all without sign-up."
+              },
+              {
+                q: "Can I watch Soccer100 on my smartphone?",
+                a: "Absolutely. Soccer100 is fully responsive and works perfectly on Android and iPhone browsers. No app download is needed — just open your browser and start streaming."
+              },
+              {
+                q: "Why does Soccer100's domain sometimes change?",
+                a: "Like many free soccer streams platforms, Soccer100 may update its domain due to regional blocks or technical reasons. Always search for the latest Soccer100 link or bookmark a trusted redirect."
+              },
+              {
+                q: "Does Soccer100 show real-time match scores?",
+                a: "Yes. Live scores, goals, cards, and match events are updated in real-time on Soccer100, so even if you can't watch the stream, you can still follow every moment of the game."
+              },
+              {
+                q: "Is it safe to use Soccer100?",
+                a: "Soccer100 is safe to use on all modern browsers. We recommend using an ad blocker for a cleaner experience. No software installation is ever required to access soccer streams on our platform."
+              }
+            ].map(item => (
+              <div class="theme-card p-6 rounded-xl shadow-md border border-white/10 text-left">
+                <h4 class="font-black text-[#f3a833] mb-2">{item.q}</h4>
+                <p class="theme-text-secondary text-sm leading-relaxed">{item.a}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="theme-card p-10 rounded-2xl text-center shadow-2xl mb-16 border border-white/5">
+            <h2 class="text-4xl font-black mb-6">Start Watching on Soccer100 Now</h2>
+            <p class="text-lg leading-relaxed max-w-2xl mx-auto opacity-90">
+              Don't miss another kickoff. <strong>Soccer100</strong> is your all-in-one destination for free, high-quality <strong>soccer streams</strong> covering every league and tournament that matters. Bookmark Soccer100 today and never hunt for a working stream again.
+            </p>
+          </div>
+
+          <!-- Latest from Blog -->
+          <div class="mt-16 mb-16">
+            <h2 class="text-3xl font-black theme-text-primary mb-8 text-center">
+              Latest from our <span class="text-[#f3a833]">Blog</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "Why Soccer100 is the Best Platform",
+                  url: "/blog/soccer100-best-live-streaming/",
+                  icon: "🚀"
+                },
+                {
+                  title: "How to Watch Streams for Free",
+                  url: "/blog/how-to-watch-soccer-streams-free/",
+                  icon: "💡"
+                },
+                {
+                  title: "Top Features of Soccer100",
+                  url: "/blog/top-features-soccer-streams-tv/",
+                  icon: "⭐"
+                }
+              ].map(post => (
+                <a href={post.url} class="theme-card p-6 rounded-xl border border-white/10 hover:border-[#f3a833]/50 transition-all group shadow-md">
+                  <div class="text-2xl mb-3">{post.icon}</div>
+                  <h3 class="font-bold theme-text-primary group-hover:text-[#f3a833] transition-colors mb-2">{post.title}</h3>
+                  <span class="text-[#f3a833] text-sm font-bold flex items-center gap-1">
+                    Read More 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </a>
+              ))}
+            </div>
+            <div class="text-center mt-8">
+              <a href="/blog/" class="inline-block px-6 py-2 border border-[#f3a833] text-[#f3a833] font-bold rounded-lg hover:bg-[#f3a833] hover:text-black transition-all">
+                View All Articles
+              </a>
+            </div>
+          </div>
+         </div>
+       </div>
+
+      <div class="prose max-w-none rounded-xl theme-card border border-white/5 p-6 shadow-lg backdrop-blur-sm">
         <div>
-          <h2>Your Premier Destination for Soccer Streams on Soccer100</h2>
+          <h2 class="text-[#f3a833]">Soccer100 — The Ultimate Free Soccer Streams Hub</h2>
           <p>
-            For avid football fans across the globe, finding reliable <strong>soccer streams</strong> and real-time match schedules is essential. <strong>Soccer100</strong> has established itself as the ultimate platform to monitor game timetables, league standings, and live broadcast details. We aggregate active schedules and match statistics for every major football league, ensuring you stay connected to the beautiful game.
+            Millions of football fans around the world rely on <strong>Soccer100</strong> as their daily source for free <strong>soccer streams</strong>. In an era where broadcasting rights restrict access and subscription costs continue to rise, Soccer100 removes every barrier — giving every fan unrestricted access to HD live football, regardless of their location or budget.
           </p>
           
-          <h2>Why Choose Soccer100 for Live Match Schedules?</h2>
+          <h2>Why Soccer100 is the #1 Soccer Streams Platform</h2>
           <p>
-            Navigating through scattered online schedules can be exhausting. <strong>Soccer100</strong> simplifies this experience by offering a modern, clean, and highly responsive user interface. We provide updated kickoff times, team line-ups, and live stream options so you can plan your football viewing experience without hassle.
+            The secret behind Soccer100's dominance is simplicity combined with depth. Our platform aggregates verified <strong>soccer streams</strong> from trusted sources and presents them in a structured, ad-light format that prioritizes the fan experience. You get real kickoff times, accurate match data, team crests, and direct stream access — all in one place, updated continuously throughout the day.
           </p>
           
-          <h3>Comprehensive Coverage of Elite Football Leagues</h3>
+          <h3>Full League Coverage on Soccer100</h3>
           <p>
-            No matter which domestic league or continental tournament you follow, Soccer100 keeps you covered:
+            Soccer100 doesn't cherry-pick only the biggest games. We stream it all:
           </p>
           <ul>
-            <li><strong>English Premier League:</strong> Follow every fixture from the world's most competitive football league.</li>
-            <li><strong>UEFA Champions League:</strong> Track mid-week European clashes and high-stakes knockout games.</li>
-            <li><strong>La Liga & Serie A:</strong> Stay updated on matches featuring top Spanish and Italian clubs.</li>
-            <li><strong>International Tournaments:</strong> Stay tuned for World Cup qualifiers, Euros, and Copa América schedules.</li>
+            <li><strong>Premier League:</strong> Every gameweek fixture from England's top flight, streamed live on Soccer100 in HD.</li>
+            <li><strong>UEFA Champions League:</strong> Group stages, knockout rounds, and the final — all on Soccer100 soccer streams.</li>
+            <li><strong>La Liga & Serie A:</strong> Follow El Clasico, Derby della Madonnina, and every round of Spain and Italy's elite leagues.</li>
+            <li><strong>World Cup & Euros:</strong> International tournaments streamed live — Soccer100 has you covered for every nation's journey.</li>
+            <li><strong>African & Asian Leagues:</strong> Soccer100 is one of the few platforms that gives equal attention to AFCON, Saudi Pro League, and Asian Cup fixtures.</li>
           </ul>
           
-          <h3>Seamless Viewing Across All Devices</h3>
+          <h3>Optimized for All Screens</h3>
           <p>
-            Our web platform is fully optimized to deliver a premium viewing experience on any screen. Whether you are using a smartphone, a tablet, or a desktop computer, you can easily access <strong>Soccer100</strong>'s live schedules and streams on the go without installing extra plugins or software.
+            Whether you're at home on a 4K TV, commuting with your phone, or watching at work on a laptop, <strong>Soccer100 soccer streams</strong> adapt automatically to deliver the best experience for your screen size and connection speed. No plugins, no downloads, no fuss — just open the site and watch.
           </p>
           
-          <h2>Soccer100 & Soccer Streams FAQs</h2>
+          <h2>Everything You Need to Know About Soccer100</h2>
           
-          <h3>How does Soccer100 help me watch live matches?</h3>
+          <h3>How does Soccer100 find and list soccer streams?</h3>
           <p>
-            <strong>Soccer100</strong> lists up-to-date kick-off times, match coverage, and direct access to high-quality soccer streams, helping you find active broadcast links for all major tournaments.
+            <strong>Soccer100</strong> monitors dozens of verified streaming sources in real-time. When a match goes live, our system identifies working streams and posts them with quality ratings so you can pick the best link for your connection.
           </p>
           
-          <h3>Is there a cost to access schedules and stream links on Soccer100?</h3>
+          <h3>Does Soccer100 require any account or subscription?</h3>
           <p>
-            No, <strong>Soccer100</strong> is completely free. We do not require registration or premium subscriptions to view our schedules and match updates.
+            Never. <strong>Soccer100</strong> is completely free and open. No sign-up, no email, no payment method — just visit the site and access any soccer stream instantly.
           </p>
           
-          <h3>How often are the match schedules updated?</h3>
+          <h3>How current is the schedule on Soccer100?</h3>
           <p>
-            We refresh our fixtures and broadcast schedule in real-time. Any dynamic timing adjustments made by the official football leagues are reflected instantly.
+            The Soccer100 schedule updates in real-time. Fixture changes, postponements, and new stream links are reflected within minutes of any official announcement by the league or broadcaster.
           </p>
           
-          <h3>What should I do if a stream fails to load?</h3>
+          <h3>What if a soccer stream stops working mid-match?</h3>
           <p>
-            If a stream lags or fails, we recommend checking your internet connection or refreshing the Soccer100 homepage to load alternative active streaming links.
+            Every match on <strong>Soccer100</strong> includes multiple backup stream links. Simply return to the match page, pick an alternative link, and continue watching — usually within seconds.
           </p>
         </div>
       </div>
 
   
     </div>
-  </div>
+       </div>
+
+<script is:inline>
+  const searchInput = document.getElementById('match-search');
+  const sportSections = document.querySelectorAll('.sport-section');
+  const noMatchesMsg = document.getElementById('no-matches-found');
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase().trim();
+      let hasAnyMatches = false;
+
+      sportSections.forEach(section => {
+        const cards = section.querySelectorAll('.match-card');
+        let hasMatchesInSection = false;
+
+        cards.forEach(card => {
+          const searchData = card.getAttribute('data-search');
+          if (searchData.includes(searchTerm)) {
+            card.classList.remove('hidden');
+            card.classList.add('grid');
+            hasMatchesInSection = true;
+            hasAnyMatches = true;
+          } else {
+            card.classList.remove('grid');
+            card.classList.add('hidden');
+          }
+        });
+
+        if (hasMatchesInSection) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+
+      if (hasAnyMatches) {
+        noMatchesMsg.classList.add('hidden');
+      } else {
+        noMatchesMsg.classList.remove('hidden');
+      }
+    });
+  }
+</script>
 </Layout>

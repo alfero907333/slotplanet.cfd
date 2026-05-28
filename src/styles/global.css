@@ -5,6 +5,65 @@
   --color-brand: #00C950;
 }
 
+:root {
+  --bg-color: #323740;
+  --card-bg: #3c424d;
+  --card-hover: #464c59;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --nav-bg: #323740;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --accent-color: #f3a833;
+}
+
+:root.light {
+  --bg-color: #ffffff;
+  --card-bg: #f3f4f6;
+  --card-hover: #e5e7eb;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --nav-bg: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --accent-color: #f3a833;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-card {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.theme-card-hover:hover {
+  background-color: var(--card-hover);
+}
+
+.theme-text-primary {
+  color: var(--text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+
+.theme-nav {
+  background-color: var(--nav-bg);
+  border-color: var(--border-color);
+}
+
+.light .prose {
+  --tw-prose-body: #374151;
+  --tw-prose-headings: #111827;
+  --tw-prose-links: #2563eb;
+  --tw-prose-bold: #111827;
+  --tw-prose-bullets: #d1d5db;
+}
+
 strong {
   @apply text-brand
 }

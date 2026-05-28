@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "404 - Page Not Found | Soccer100";
+const description = "Oops! The page you are looking for on Soccer100 doesn't exist. Return to our home page for the latest Soccer Streams.";
+---
+
+<Layout title={title} description={description}>
+  <div class="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+    <h1 class="text-9xl font-black text-[#f3a833] mb-4">404</h1>
+    <h2 class="text-3xl font-bold theme-text-primary mb-6">Oops! Page Not Found</h2>
+    <p class="theme-text-secondary text-lg max-w-md mb-10">
+      It seems you've followed a broken link or the page has been moved. Don't worry, you can still catch all the live football action on our homepage.
+    </p>
+    <a
+      href="/"
+      class="px-8 py-4 bg-[#f3a833] text-black font-black rounded-xl text-xl transition-all hover:bg-[#e29722] hover:scale-105 shadow-lg"
+    >
+      Return to Homepage
+    </a>
+  </div>
+</Layout>

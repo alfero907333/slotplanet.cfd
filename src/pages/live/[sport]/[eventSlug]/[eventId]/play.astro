@@ -35,11 +35,14 @@ export const prerender = false;
 ---
 
 <!doctype html>
-<html>
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sportsmurge</title>
+    <title>Watch Live Stream | Soccer100 | Soccer Streams</title>
+    <meta name="description" content="Watch live football streams on Soccer100 and Soccer Streams. Free HD quality matches for all major leagues." />
+    <meta name="keywords" content="Soccer100, Soccer Streams, Live Stream, Football Live Stream, Watch Football Online" />
+    <meta name="robots" content="noindex, follow" />
     <script is:inline type="text/javascript" data-cfasync="false">
       /*<![CDATA[/* */
       (function () {
@@ -95,16 +98,31 @@ export const prerender = false;
 
 
     <script async src="//waust.at/d.js"></script>
+    <script is:inline>
+      // Default theme is 'dark' (moon)
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return 'dark';
+      })();
+    
+      if (theme === 'light') {
+        document.documentElement.classList.add('light');
+      } else {
+        document.documentElement.classList.remove('light');
+      }
+    </script>
   </head>
-  <body class="bg-neutral-950 flex flex-col items-center">
+  <body class="flex flex-col items-center min-h-screen">
     <main
-      class="max-w-375 my-6 grid grid-cols-12 gap-3 max-lg:grid-cols-1 mx-2"
+      class="max-w-6xl w-full my-6 grid grid-cols-12 gap-3 max-lg:grid-cols-1 mx-2"
     >
       <!-- Left Sidebar -->
       <div
         class="col-span-2 max-lg:col-span-12 flex justify-end items-start max-lg:justify-start"
       >
-        <div class="bg-neutral-900 p-3 rounded">
+        <div class="theme-card p-3 rounded">
           <!-- <script is:inline>
             atOptions = {
               key: "48477921dfb524fca28c5e7b074f1f91",
@@ -127,7 +145,7 @@ export const prerender = false;
         <!-- Main Content -->
         <div class="flex-1 min-w-0 space-y-3">
           <!-- Top Banner -->
-          <div class="p-3 bg-neutral-900 rounded flex justify-center">
+          <div class="p-3 theme-card rounded flex justify-center">
             <!-- <script is:inline>
               atOptions = {
                 key: "a954a111d25596838b5159a716cdc01d",
@@ -144,7 +162,7 @@ export const prerender = false;
 
           <!-- Video -->
           <div
-            class="w-full p-3 bg-neutral-900 rounded [&>iframe]:aspect-video [&>iframe]:w-full [&>iframe]:h-auto"
+            class="w-full p-3 theme-card rounded [&>iframe]:aspect-video [&>iframe]:w-full [&>iframe]:h-auto"
           >
             <iframe
               frameborder="0"
@@ -153,11 +171,13 @@ export const prerender = false;
               scrolling="no"
               allowtransparency="true"
               class="rounded-lg shadow-lg"
-              id="player"></iframe>
+              id="player"
+              title="Live Stream Player"
+              loading="lazy"></iframe>
           </div>
 
           <!-- Bottom Banner -->
-          <div class="p-3 bg-neutral-900 rounded flex justify-center">
+          <div class="p-3 theme-card rounded flex justify-center">
             <!-- <script is:inline>
               atOptions = {
                 key: "4eb7b0c41d60e70de54d98e6fedfd898",
@@ -175,7 +195,7 @@ export const prerender = false;
 
         <!-- Right Sidebar -->
         <div class="shrink-0 max-lg:flex">
-          <div class="bg-neutral-900 p-3 rounded">
+          <div class="theme-card p-3 rounded">
             <!-- <script is:inline>
               atOptions = {
                 key: "e48c9789a9514b5d78a442e9a7717089",

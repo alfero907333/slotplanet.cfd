@@ -1,0 +1,164 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Soccer100 Blog - Latest News & Guides for Soccer Streams";
+const description = "Read the latest guides and news about live football streaming on Soccer100. Learn how to get the best Soccer Streams experience.";
+const keywords = "Soccer100 Blog, Soccer Streams News, Football Streaming Guides";
+
+const posts = [
+  {
+    title: "Soccer Streams — Best Sites to Watch Live Football 2026",
+    description: "Looking for the best soccer streams in 2026? Check out our ultimate guide to the top streaming sites.",
+    url: "/blog/best-soccer-streaming-sites-2026/",
+    date: "May 28, 2026",
+    category: "Featured"
+  },
+  {
+    title: "Soccer100 vs Other Soccer Stream Sites — Which is Best?",
+    description: "Soccer100 vs other soccer stream sites: A detailed comparison for the best football experience.",
+    url: "/blog/soccer100-vs-other-streaming-sites/",
+    date: "May 28, 2026",
+    category: "Comparison"
+  },
+  {
+    title: "Soccer100: Watch Free Live Soccer Streams Today",
+    description: "Soccer100 gives you instant access to free live soccer streams today. Watch Premier League, La Liga, and more.",
+    url: "/blog/soccer100-watch-free-live-streams/",
+    date: "May 28, 2026",
+    category: "Featured"
+  },
+  {
+    title: "Why Soccer100 is the Best Platform for Live Football Streaming",
+    description: "Discover why Soccer100 is the leading destination for soccer fans looking for high-quality Soccer Streams.",
+    url: "/blog/soccer100-best-live-streaming/",
+    date: "May 27, 2026",
+    category: "Guide"
+  },
+  {
+    title: "How to Watch Soccer Streams for Free in 2026",
+    description: "A complete guide on how to access the best Soccer Streams on Soccer100 for free.",
+    url: "/blog/how-to-watch-soccer-streams-free/",
+    date: "May 27, 2026",
+    category: "Guide"
+  },
+  {
+    title: "Top Features of Soccer100 for Global Football Fans",
+    description: "Explore the unique features that make Soccer100 and Soccer Streams the preferred choice for millions.",
+    url: "/blog/top-features-soccer-streams-tv/",
+    date: "May 26, 2026",
+    category: "Guide"
+  },
+  {
+    title: "Soccer100 Not Working? Here is How to Fix It Fast",
+    description: "Is Soccer100 not working for you? Check out this comprehensive guide on how to fix common issues.",
+    url: "/blog/soccer100-not-working/",
+    date: "May 26, 2026",
+    category: "Troubleshooting"
+  },
+  {
+    title: "Top Sites Like Soccer100 for Live Football Streaming",
+    description: "Looking for sites like Soccer100? Explore the best alternatives for high-quality Soccer Streams.",
+    url: "/blog/sites-like-soccer100/",
+    date: "May 25, 2026",
+    category: "Alternatives"
+  },
+  {
+    title: "Soccer100 vs FootyBite: Which One is Better?",
+    description: "A detailed comparison between Soccer100 and FootyBite for football fans.",
+    url: "/blog/soccer100-vs-footybite/",
+    date: "May 25, 2026",
+    category: "Comparison"
+  },
+  {
+    title: "Best Soccer100 Alternatives to Use in 2026",
+    description: "Check out our curated list of reliable Soccer Streams sites for 2026.",
+    url: "/blog/soccer100-alternatives-2026/",
+    date: "May 24, 2026",
+    category: "Alternatives"
+  },
+  {
+    title: "Soccer100 Down? Quick Fixes and Solutions",
+    description: "Is Soccer100 down? Learn the quick fixes to get back to your favorite Soccer Streams.",
+    url: "/blog/soccer100-down-fix/",
+    date: "May 24, 2026",
+    category: "Troubleshooting"
+  },
+  {
+    title: "How to Watch Premier League Live on Soccer100",
+    description: "Learn how to use Soccer100 and Soccer Streams to watch the Premier League for free.",
+    url: "/blog/premier-league-soccer100/",
+    date: "May 23, 2026",
+    category: "Leagues"
+  },
+  {
+    title: "Watch Champions League Live: The Soccer100 Guide",
+    description: "Learn how to watch every Champions League match for free on Soccer100.",
+    url: "/blog/champions-league-soccer100/",
+    date: "May 23, 2026",
+    category: "Leagues"
+  },
+  {
+    title: "La Liga Live Streaming: Watch Spanish Football on Soccer100",
+    description: "Discover how to watch every La Liga match live and for free on Soccer100.",
+    url: "/blog/la-liga-soccer100/",
+    date: "May 22, 2026",
+    category: "Leagues"
+  },
+  {
+    title: "Serie A Live: Watch Italian Football on Soccer100",
+    description: "Learn how to watch every Serie A match for free on Soccer100.",
+    url: "/blog/serie-a-soccer100/",
+    date: "May 22, 2026",
+    category: "Leagues"
+  },
+  {
+    title: "Watch the World Cup Live: Your Soccer100 Guide",
+    description: "Learn how to watch every World Cup match for free on Soccer100.",
+    url: "/blog/world-cup-soccer100/",
+    date: "May 22, 2026",
+    category: "Leagues"
+  }
+];
+---
+
+<Layout title={title} description={description} keywords={keywords}>
+  <div class="max-w-4xl mx-auto px-4 py-12">
+    <div class="text-center mb-16">
+      <h1 class="text-5xl font-black theme-text-primary mb-4">
+        Soccer100 <span class="text-[#f3a833]">Blog</span>
+      </h1>
+      <p class="theme-text-secondary text-xl max-w-2xl mx-auto">
+        Your ultimate guide to the world of live football streaming and Soccer Streams.
+      </p>
+    </div>
+
+    <div class="grid gap-8">
+      {posts.map(post => (
+        <a href={post.url} class="group block">
+          <div class="theme-card p-8 rounded-2xl border border-white/10 shadow-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:border-[#f3a833]/30">
+            <div class="flex justify-between items-start mb-4">
+              <span class="text-xs font-bold text-[#f3a833] uppercase tracking-widest bg-[#f3a833]/10 px-3 py-1 rounded-full">
+                {post.category}
+              </span>
+              <span class="text-sm theme-text-secondary font-medium">
+                {post.date}
+              </span>
+            </div>
+            <h2 class="text-2xl font-black theme-text-primary mb-3 group-hover:text-[#f3a833] transition-colors">
+              {post.title}
+            </h2>
+            <p class="theme-text-secondary leading-relaxed mb-6">
+              {post.description}
+            </p>
+            <div class="flex items-center text-[#f3a833] font-bold gap-2">
+              Read Article 
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
