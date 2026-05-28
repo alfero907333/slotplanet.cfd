@@ -27,6 +27,7 @@ const canonicalUrl = new URL(Astro.url.pathname, PUBLIC_BASE_URL);
     <meta itemprop="description" name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <meta property="og:title" content={SITE_NAME} />
     <meta property="og:type" content="website" />
     <meta name="msvalidate.01" content="BFFF0110E42A5E514F0526F2D5657C78" />
