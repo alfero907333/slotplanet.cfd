@@ -46,6 +46,10 @@ const {
   event_date_time,
 } = data;
 
+// Handle missing names
+const displayHome = strHomeTeam || (teams?.includes(' vs ') ? teams.split(' vs ')[0] : (teams?.includes(' VS ') ? teams.split(' VS ')[0] : teams));
+const displayAway = strAwayTeam || (teams?.includes(' vs ') ? teams.split(' vs ')[1] : (teams?.includes(' VS ') ? teams.split(' VS ')[1] : ''));
+
 // Basic translations for time, date, and sports terms
 const translateSportsData = (str: string) => {
   if (!str) return str;
@@ -60,9 +64,9 @@ export const prerender = false;
 ---
 
 <Layout
-  title={`${translateSportsData(strHomeTeam)} vs ${translateSportsData(strAwayTeam)} Live Free – Soccer100`}
-  description={`Watch ${translateSportsData(strHomeTeam)} vs ${translateSportsData(strAwayTeam)} live stream free on Soccer100. Best HD soccer streams for ${translateSportsData(league)} online.`}
-  keywords="soccer100, soccer streams"
+  title={`${translateSportsData(displayHome)} vs ${translateSportsData(displayAway)} Live Free – Soccer100 & totalsportek`}
+  description={`Watch ${translateSportsData(displayHome)} vs ${translateSportsData(displayAway)} live stream free on Soccer100. Premium soccer streams for ${translateSportsData(league)} via totalsportek.`}
+  keywords="soccer100, soccer streams, totalsportek"
 >
   <div class="pt-10 px-4 max-w-3xl mx-auto text-left">
     <div
@@ -101,7 +105,7 @@ export const prerender = false;
         <h1 class="text-[#f3a833]">Watch {translateSportsData(teams)} Live Free on Soccer100</h1>
 
         <p class="theme-text-secondary leading-relaxed">
-          The excitement is building as <strong>{translateSportsData(teams)}</strong> takes center stage in <strong>{translateSportsData(league)}</strong>. If you're looking for the best <strong>soccer streams</strong> to catch every moment of this clash, <strong>Soccer100</strong> is your ultimate destination. Scheduled for <strong>{translateSportsData(event_date_time)}</strong>, we provide high-definition coverage that ensures you don't miss a single goal, all without the need for a subscription.
+          The anticipation for <strong>{translateSportsData(teams)}</strong> is reaching fever pitch as it prepares to kick off in the <strong>{translateSportsData(league)}</strong>. If you are looking for the most reliable <strong>soccer streams</strong> to follow this encounter, <strong>Soccer100</strong> is your ultimate destination. We provide high-definition coverage that ensures you don't miss a single moment, offering a robust alternative to <strong>totalsportek</strong> for fans worldwide.
         </p>
 
         <h2 class="text-[#f3a833] border-b border-white/10 pb-2">
@@ -109,11 +113,11 @@ export const prerender = false;
         </h2>
 
         <p class="theme-text-secondary">
-          This upcoming fixture between <strong>{strHomeTeam}</strong> and <strong>{strAwayTeam}</strong> is one of the most talked-about matches in <strong>{translateSportsData(league)}</strong> this week. Both teams are in peak form, making this a must-watch event for football enthusiasts. On <strong>Soccer100</strong>, we specialize in providing reliable <strong>soccer streams</strong> that bring the stadium atmosphere directly to your screen, whether you're at home or on the go.
+          This fixture between <strong>{displayHome}</strong> and <strong>{displayAway}</strong> is one of the highlight matches in the <strong>{translateSportsData(league)}</strong> calendar. Both teams have shown incredible form recently, making this a must-watch event for any football enthusiast. On <strong>Soccer100</strong>, we specialize in delivering <strong>soccer streams</strong> with <strong>totalsportek</strong> level depth and consistency, ensuring that whether you are at home or on the go, the action is just a click away.
         </p>
 
         <p class="theme-text-secondary">
-          <strong>{strHomeTeam}</strong> will be looking to capitalize on their recent momentum, aiming to dominate possession and break down the opposition's defense early on. On the other hand, <strong>{strAwayTeam}</strong> is known for their resilience and quick counter-attacks, making them a dangerous opponent in any setting. Join us on <strong>Soccer100</strong> to see which side comes out on top in this thrilling encounter.
+          <strong>{displayHome}</strong> will be aiming to leverage their home advantage to secure a vital win, while <strong>{displayAway}</strong> is known for their tactical discipline and ability to perform under pressure. Join us on <strong>Soccer100</strong> to witness which side will emerge victorious in this thrilling <strong>{translateSportsData(league)}</strong> clash.
         </p>
 
         <h2 class="text-[#f3a833] border-b border-white/10 pb-2">
@@ -130,7 +134,7 @@ export const prerender = false;
                 <th class="p-4 font-black text-[#f3a833] border-r border-white/5"
                   >Matchup</th
                 >
-                <td class="p-4 font-bold">{translateSportsData(strHomeTeam)} vs {translateSportsData(strAwayTeam)}</td>
+                <td class="p-4 font-bold">{translateSportsData(displayHome)} vs {translateSportsData(displayAway)}</td>
               </tr>
               <tr class="border-b border-white/5 hover:theme-card-hover transition-colors">
                 <th class="p-4 font-black text-[#f3a833] border-r border-white/5"
@@ -149,21 +153,21 @@ export const prerender = false;
         <h2 class="text-[#f3a833] border-b border-white/10 pb-2 mt-8">Tactical Analysis</h2>
 
         <p class="theme-text-secondary leading-relaxed">
-          Tactically, <strong>{strHomeTeam}</strong> is expected to employ a fluid attacking style, utilizing their wingers to create width and stretch the defense. Their ability to transition quickly from defense to attack will be key in this <strong>{translateSportsData(league)}</strong> matchup. Fans watching on <strong>Soccer100</strong> can expect a high-intensity game where every tactical decision could be the difference between victory and defeat.
+          From a tactical standpoint, <strong>{displayHome}</strong> is expected to dominate possession and use their creative midfielders to break down the opposition. Their performance in this <strong>{translateSportsData(league)}</strong> match will be a key indicator of their season's trajectory. Fans watching our <strong>soccer streams</strong> can expect a high-tempo game where tactical precision will be the deciding factor.
         </p>
 
         <p class="theme-text-secondary leading-relaxed">
-          Conversely, <strong>{strAwayTeam}</strong> might opt for a more disciplined, compact approach, looking to frustrate the home side and exploit any gaps left behind. Their set-piece delivery and aerial threat could also play a major role in the outcome. No matter the strategy, <strong>Soccer100</strong> ensures you have access to the best <strong>soccer streams</strong> to witness every tactical move as it happens.
+          On the other hand, <strong>{displayAway}</strong> might employ a more defensive strategy, looking to exploit <strong>totalsportek</strong> style counter-attacking opportunities. Their ability to transition quickly from defense to attack could prove decisive. No matter the strategy, <strong>Soccer100</strong> ensures you have the best <strong>soccer streams</strong> to witness every move as it unfolds live.
         </p>
 
         <h2 class="text-[#f3a833] border-b border-white/10 pb-2 mt-8">Why Stream on Soccer100?</h2>
 
         <p class="theme-text-secondary leading-relaxed">
-          <strong>Soccer100</strong> has established itself as a premier platform for free <strong>soccer streams</strong> by consistently delivering high-quality content without the typical barriers. For the <strong>{translateSportsData(teams)}</strong> match, we offer multiple streaming links to ensure that you always have a working connection. Our site is optimized for speed and performance, providing a buffer-free experience on all devices.
+          <strong>Soccer100</strong> has established itself as the leading platform for free <strong>soccer streams</strong> by consistently delivering high-quality feeds without the typical frustrations of <strong>totalsportek</strong> mirrors. For the <strong>{translateSportsData(teams)}</strong> match, we offer multiple links to ensure that you always have a stable and working connection.
         </p>
 
         <p class="theme-text-secondary leading-relaxed">
-          Enjoy the best of <strong>{translateSportsData(league)}</strong> football without the hassle of sign-ups or hidden costs. <strong>Soccer100</strong> is dedicated to bringing the game to the fans, providing HD <strong>soccer streams</strong> that are accessible to everyone, everywhere. Make Soccer100 your home for football and never miss another match.
+          Enjoy the best of the <strong>{translateSportsData(league)}</strong> without the need for subscriptions or hidden costs. <strong>Soccer100</strong> is dedicated to bringing the beautiful game to the fans, providing HD <strong>soccer streams</strong> and <strong>totalsportek</strong> reliability that are accessible to everyone, everywhere. Make Soccer100 your home for live football and never miss another kickoff.
         </p>
 
       </div>

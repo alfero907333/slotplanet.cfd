@@ -31,9 +31,9 @@ export const prerender = false;
 ---
 
 <Layout
-title="Soccer100: Free Live Soccer Streams & HD Football Online"
-description="Watch free live soccer streams on Soccer100. Get HD coverage of Premier League, La Liga, and Champions League with real-time match schedules and scores."
-keywords="soccer100, soccer streams" >
+title="Soccer100: Best Free Soccer Streams & totalsportek Links"
+description="Watch live soccer streams on Soccer100. Get HD football coverage of Premier League & UCL with totalsportek style schedules and no sign-up fees."
+keywords="soccer100, soccer streams, totalsportek" >
 
   <div class="mx-auto mb-4 max-w-4xl">
     <div class="mx-3 space-y-8">
@@ -42,11 +42,11 @@ keywords="soccer100, soccer streams" >
         <h1 class="text-3xl sm:text-5xl font-black tracking-tight theme-text-primary leading-tight">
           <span class="text-[#f3a833]">Soccer100</span>
           <br/>
-          Best Free Soccer Streams & Live Match Schedules
+          Premium Soccer Streams & totalsportek Schedules
         </h1>
 
         <p class="theme-text-secondary mt-6 max-w-2xl mx-auto text-lg opacity-90">
-          Welcome to Soccer100, the leading platform for high-quality soccer streams and live football updates. Enjoy every major league and tournament in HD without any subscription fees or sign-ups.
+          Welcome to Soccer100, your home for high-quality soccer streams and totalsportek football updates. Stream every major league in HD without subscription fees.
         </p>
 
         <div class="flex flex-wrap justify-center gap-3 mt-8">
@@ -166,6 +166,24 @@ keywords="soccer100, soccer streams" >
     const home = event.strHomeTeam;
     const away = event.strAwayTeam;
 
+    // Handle missing names for Fighting/Motorsports
+    let displayHome = home;
+    let displayAway = away;
+
+    if ((!displayHome || !displayAway) && event.teams) {
+      if (event.teams.includes(' vs ')) {
+        const parts = event.teams.split(' vs ');
+        displayHome = displayHome || parts[0];
+        displayAway = displayAway || parts[1];
+      } else if (event.teams.includes(' VS ')) {
+        const parts = event.teams.split(' VS ');
+        displayHome = displayHome || parts[0];
+        displayAway = displayAway || parts[1];
+      } else {
+        displayHome = displayHome || event.teams;
+      }
+    }
+
     // Basic translations for time, date, and sports terms
     const translateSportsData = (str: string) => {
       if (!str) return str;
@@ -180,19 +198,26 @@ keywords="soccer100, soccer streams" >
       <a
         href={`/live/${slugify(sport.sport)}/${slugify(`${event.teams}`)}/${event.sch_id}/`}
         class="group grid grid-cols-3 items-center theme-card theme-card-hover transition-all duration-300 rounded-lg px-4 py-4 border shadow-md match-card"
-        data-search={`${home} ${away} ${event.sch_league}`.toLowerCase()}
+        data-search={`${displayHome} ${displayAway} ${event.sch_league}`.toLowerCase()}
       >
         {/* LEFT TEAM */}
         <div class="flex items-center gap-3">
-          <img
-            src={event.sch_home_logo}
-            alt={translateSportsData(home)}
-            class="w-12 h-12 object-contain drop-shadow-md"
-            loading="lazy"
-            decoding="async"
-          />
+          {event.sch_home_logo ? (
+            <img
+              src={event.sch_home_logo}
+              alt={translateSportsData(displayHome)}
+              class="w-12 h-12 object-contain drop-shadow-md"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+             />
+           ) : (
+             <div class="w-12 h-12 flex items-center justify-center bg-neutral-500/10 rounded-full text-xl">
+                ⚽
+             </div>
+           )}
           <span class="theme-text-primary font-bold text-base sm:text-lg tracking-wide">
-            {translateSportsData(home)}
+            {translateSportsData(displayHome)}
           </span>
         </div>
 
@@ -214,15 +239,22 @@ keywords="soccer100, soccer streams" >
         {/* RIGHT TEAM */}
         <div class="flex items-center justify-end gap-3 text-right">
           <span class="theme-text-primary font-bold text-base sm:text-lg tracking-wide">
-            {translateSportsData(away)}
+            {translateSportsData(displayAway)}
           </span>
-          <img
-            src={event.sch_away_logo}
-            alt={translateSportsData(away)}
-            class="w-12 h-12 object-contain drop-shadow-md"
-            loading="lazy"
-            decoding="async"
-          />
+          {event.sch_away_logo ? (
+            <img
+              src={event.sch_away_logo}
+              alt={translateSportsData(displayAway)}
+              class="w-12 h-12 object-contain drop-shadow-md"
+              loading="lazy"
+              decoding="async"
+              onerror="this.style.display='none'"
+             />
+           ) : (
+             <div class="w-12 h-12 flex items-center justify-center bg-neutral-500/10 rounded-full text-xl">
+                ⚽
+             </div>
+           )}
         </div>
       </a>
     );
@@ -252,61 +284,51 @@ keywords="soccer100, soccer streams" >
 
         <div class="prose max-w-none theme-text-primary">
           <p class="text-lg leading-relaxed mb-6">
-            In an era where live sports are often hidden behind expensive paywalls, <strong>Soccer100</strong> emerges as the ultimate destination for fans seeking premium <strong>soccer streams</strong> at zero cost. Dedicated to the beautiful game, Soccer100 provides fast, reliable, and high-definition access to every match, ensuring that football fans worldwide stay connected to the action.
+            In the fast-evolving landscape of live sports, <strong>Soccer100</strong> has carved a niche as the premier destination for high-definition <strong>soccer streams</strong>. We understand that fans are constantly looking for reliable <strong>totalsportek</strong> alternatives that offer stability and quality. Our platform is built to deliver exactly that—unrestricted access to football matches from every corner of the globe.
           </p>
           <p class="text-lg leading-relaxed mb-10">
-            Whether it's a high-stakes Premier League clash or the prestige of a Champions League final, <strong>Soccer100</strong> is designed to make sure you never miss a kickoff. Our platform brings together the most stable <strong>soccer streams</strong> available, presenting them in a clean, user-friendly interface that requires no registration or personal details.
+            Whether you are following the tactical battles of the Premier League or the high-stakes drama of the Champions League, <strong>Soccer100</strong> ensures you are always in the front row. By aggregating the most dependable <strong>soccer streams</strong>, we provide a viewing experience that rivals and often exceeds traditional <strong>totalsportek</strong> mirrors, all while maintaining a user-friendly interface.
           </p>
 
           <h2 id="about" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6">
-            1. Why Use Soccer100?
+            1. The Evolution of Soccer100
           </h2>
           <p class="mb-4 leading-relaxed">
-            <strong>Soccer100</strong> is more than just a streaming site; it's a comprehensive hub for football enthusiasts. We focus exclusively on <strong>soccer streams</strong>, which allows us to provide a more tailored and reliable experience than general sports platforms. Every link is verified to ensure quality and uptime.
+            <strong>Soccer100</strong> was born out of a passion for making live football accessible to everyone. In a world where broadcasting rights are fragmented, we offer a centralized hub for <strong>soccer streams</strong>. Our mission is to provide the same level of depth as <strong>totalsportek</strong> but with enhanced server reliability and a cleaner design for modern devices.
           </p>
           <p class="leading-relaxed">
-            What makes <strong>Soccer100</strong> truly stand out is our commitment to accessibility. We provide multiple streaming mirrors for every event, so if one link becomes unstable, you can instantly switch to another and keep watching. Our team works around the clock to keep the platform updated with the latest working links.
+            What sets <strong>Soccer100</strong> apart is our proactive approach to link management. We don't just list <strong>soccer streams</strong>; we verify them. This ensures that when you're looking for a <strong>totalsportek</strong> style schedule, you get links that actually work, minimizing downtime and maximizing your enjoyment of the beautiful game.
           </p>
 
           <div class="theme-card p-5 rounded-lg my-8 border-l-4 border-[#f3a833] shadow-sm">
             <p class="font-bold leading-relaxed">
-              <span class="text-[#f3a833]">⚽ Pro Tip:</span> Bookmark <span class="text-[#f3a833]">Soccer100</span> today to ensure you always have instant access to the best <span class="text-[#f3a833]">soccer streams</span>, especially during peak match times when other sites might fail.
+              <span class="text-[#f3a833]">⚽ Pro Tip:</span> Bookmark <span class="text-[#f3a833]">Soccer100</span> now for instant access to premium <span class="text-[#f3a833]">soccer streams</span> and the most accurate <span class="text-[#f3a833]">totalsportek</span> match day links.
             </p>
           </div>
 
           <h2 id="features" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6 mt-16">
-            2. Features of Soccer100 Soccer Streams
+            2. Why Choose Soccer100 for Soccer Streams?
           </h2>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
             <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
-              <h4 class="font-black text-lg mb-2 text-[#f3a833]">⚡ High-Speed Streaming</h4>
-              <p class="text-sm theme-text-secondary leading-relaxed">Soccer100 leverages advanced technology to deliver smooth, buffer-free soccer streams even during the most-watched global matches.</p>
+              <h4 class="font-black text-lg mb-2 text-[#f3a833]">🚀 Next-Gen Servers</h4>
+              <p class="text-sm theme-text-secondary leading-relaxed">Soccer100 utilizes high-bandwidth infrastructure to provide soccer streams that are faster and more stable than traditional totalsportek mirrors.</p>
             </div>
             
             <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
-              <h4 class="font-black text-lg mb-2 text-[#f3a833]">💎 Crystal Clear HD</h4>
-              <p class="text-sm theme-text-secondary leading-relaxed">Experience soccer streams in stunning 1080p and 4K quality. Soccer100 automatically adjusts to your bandwidth for the clearest possible picture.</p>
+              <h4 class="font-black text-lg mb-2 text-[#f3a833]">📺 Elite HD Feeds</h4>
+              <p class="text-sm theme-text-secondary leading-relaxed">Enjoy every goal in crystal-clear HD. Our soccer streams are optimized for visual fidelity, giving you a totalsportek level experience on any screen.</p>
             </div>
 
             <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
-              <h4 class="font-black text-lg mb-2 text-[#f3a833]">📱 Multi-Device Support</h4>
-              <p class="text-sm theme-text-secondary leading-relaxed">From your desktop to your smartphone, Soccer100 soccer streams are optimized for all devices, requiring no additional apps or plugins.</p>
+              <h4 class="font-black text-lg mb-2 text-[#f3a833]">🌍 Global Reach</h4>
+              <p class="text-sm theme-text-secondary leading-relaxed">From the big leagues to niche tournaments, Soccer100 covers it all. We offer more variety in soccer streams than your average totalsportek clone.</p>
             </div>
 
             <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
-              <h4 class="font-black text-lg mb-2 text-[#f3a833]">🔄 Instant Backup Links</h4>
-              <p class="text-sm theme-text-secondary leading-relaxed">Never lose the action. Every match on Soccer100 features multiple backup links to ensure uninterrupted viewing of your favorite soccer streams.</p>
-            </div>
-
-            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
-              <h4 class="font-black text-lg mb-2 text-[#f3a833]">📈 Live Match Stats</h4>
-              <p class="text-sm theme-text-secondary leading-relaxed">Stay updated with live scores and real-time statistics directly alongside your soccer streams on Soccer100.</p>
-            </div>
-
-            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
-              <h4 class="font-black text-lg mb-2 text-[#f3a833]">🆓 Always 100% Free</h4>
-              <p class="text-sm theme-text-secondary leading-relaxed">Enjoy full access to all soccer streams on Soccer100 without ever having to pay a fee or create an account. It's truly free football for everyone.</p>
+              <h4 class="font-black text-lg mb-2 text-[#f3a833]">🛡️ Safe & Secure</h4>
+              <p class="text-sm theme-text-secondary leading-relaxed">Your privacy matters. Unlike many totalsportek mirrors, Soccer100 is designed to be a safe environment for enjoying live soccer streams without intrusive tracking.</p>
             </div>
           </div>
 
@@ -410,7 +432,7 @@ keywords="soccer100, soccer streams" >
           <div class="theme-card p-10 rounded-2xl text-center shadow-2xl mb-16 border border-white/5">
             <h2 class="text-4xl font-black mb-6">Experience Football on Soccer100</h2>
             <p class="text-lg leading-relaxed max-w-2xl mx-auto opacity-90">
-              Never miss a moment of your favorite sport. <strong>Soccer100</strong> is your trusted source for free, high-definition <strong>soccer streams</strong> across all major leagues and tournaments. Bookmark us today and join millions of fans watching football for free!
+              Never miss a moment of your favorite sport. <strong>Soccer100</strong> is your trusted source for free, high-definition <strong>soccer streams</strong> and <strong>totalsportekz</strong> quality coverage across all major leagues and tournaments. Bookmark us today and join millions of fans watching football for free!
             </p>
           </div>
 
@@ -460,53 +482,47 @@ keywords="soccer100, soccer streams" >
 
       <div class="prose max-w-none rounded-xl theme-card border border-white/5 p-6 shadow-lg backdrop-blur-sm">
         <div>
-          <h2 class="text-[#f3a833]">Soccer100: Your Premium Source for Free Soccer Streams</h2>
+          <h2 class="text-[#f3a833]">Soccer100: The Future of Free Soccer Streams</h2>
           <p>
-            For football fans around the globe, <strong>Soccer100</strong> has become the go-to platform for high-quality, free <strong>soccer streams</strong>. We understand the frustration of missing a big game due to broadcasting restrictions, which is why we've built a service that offers unrestricted access to HD football matches from every corner of the world.
+            For millions of fans, <strong>Soccer100</strong> has become the definitive source for high-quality, free <strong>soccer streams</strong>. We recognize that the search for a reliable <strong>totalsportek</strong> alternative is constant, which is why we've engineered a platform that prioritizes speed, clarity, and uptime above all else.
           </p>
           
-          <h2>Why Fans Choose Soccer100 for Soccer Streams</h2>
+          <h2>Why Fans are Migrating to Soccer100</h2>
           <p>
-            What makes Soccer100 the top choice for <strong>soccer streams</strong> is our dedication to quality and simplicity. Our platform focuses on delivering verified links that work, minimizing the time you spend searching and maximizing the time you spend watching. With a focus on user experience, we provide a clean interface that lets you jump straight into the action.
+            The shift towards <strong>Soccer100</strong> is driven by our commitment to providing verified <strong>soccer streams</strong>. While traditional <strong>totalsportek</strong> mirrors often suffer from excessive ads and broken links, our platform focuses on a streamlined user experience. We provide direct access to HD football matches, ensuring that you spend less time searching and more time watching your favorite teams.
           </p>
           
-          <h3>Comprehensive Coverage on Soccer100</h3>
+          <h3>Unmatched Coverage on Soccer100</h3>
           <p>
-            Whether it's a domestic league or an international tournament, Soccer100 covers the football world:
+            Our reach extends to every major competition, offering a <strong>totalsportek</strong> style variety with superior execution:
           </p>
           <ul>
-            <li><strong>English Premier League:</strong> Watch every matchday live on Soccer100 with our high-quality soccer streams.</li>
-            <li><strong>UEFA Champions League:</strong> Follow the journey to the final with HD streams for every knockout game.</li>
-            <li><strong>European Elite:</strong> From La Liga to Serie A, Soccer100 brings you the best of European football for free.</li>
-            <li><strong>Global Tournaments:</strong> Whether it's the World Cup or the Euros, our soccer streams have you covered.</li>
-            <li><strong>Regional Leagues:</strong> We also feature matches from across Africa, Asia, and the Americas, ensuring no fan is left behind.</li>
+            <li><strong>Premier League:</strong> Catch every matchday live with our premium <strong>soccer streams</strong>.</li>
+            <li><strong>Champions League:</strong> Experience the magic of European nights in stunning HD on <strong>Soccer100</strong>.</li>
+            <li><strong>La Liga & Serie A:</strong> Follow the technical brilliance of Spanish and Italian football without restrictions.</li>
+            <li><strong>Global Events:</strong> From the World Cup to the Euros, our <strong>soccer streams</strong> have you covered.</li>
           </ul>
           
-          <h3>Optimized Viewing Experience</h3>
+          <h3>Device-Agnostic Viewing Experience</h3>
           <p>
-            Our <strong>soccer streams</strong> are designed to work perfectly on any device. Whether you're watching on a large 4K screen at home or on your mobile during a commute, Soccer100 adapts to provide the best possible resolution and performance. No plugins or downloads are required—just high-quality football at your fingertips.
+            Whether you are at home or on the move, <strong>Soccer100</strong> delivers <strong>soccer streams</strong> that adapt to your device. Our mobile-first approach ensures that you get a <strong>totalsportek</strong> level of performance on your smartphone, tablet, or desktop, all without needing external apps or plugins.
           </p>
           
           <h2>Soccer100 FAQ</h2>
           
-          <h3>How do I find the best soccer streams on Soccer100?</h3>
+          <h3>Is Soccer100 a reliable totalsportek alternative?</h3>
           <p>
-            Our team monitors dozens of sources to provide you with the most reliable <strong>soccer streams</strong>. Simply visit the match page and choose from the listed links, which are often rated for quality and stability.
+            Absolutely. <strong>Soccer100</strong> is designed to be the next evolution of <strong>totalsportek</strong>, offering more stable <strong>soccer streams</strong> and a cleaner interface for a better overall viewing experience.
           </p>
           
-          <h3>Is registration required on Soccer100?</h3>
+          <h3>Do I need to sign up to watch soccer streams?</h3>
           <p>
-            No. <strong>Soccer100</strong> is completely open and free to use. You can access all of our soccer streams without ever needing to create an account or provide personal information.
+            No. <strong>Soccer100</strong> follows an open-access model. You can enjoy all our <strong>soccer streams</strong> and <strong>totalsportek</strong> style schedules without ever creating an account.
           </p>
           
-          <h3>How often is the Soccer100 schedule updated?</h3>
+          <h3>What makes Soccer100 streams better?</h3>
           <p>
-            The schedule on Soccer100 is updated in real-time. We ensure that all kickoff times, fixture changes, and new stream links are reflected immediately so you're always in the loop.
-          </p>
-          
-          <h3>What if a stream goes down?</h3>
-          <p>
-            In the rare event that a stream becomes unavailable, simply return to the match page on <strong>Soccer100</strong> and select one of the many backup links we provide. We ensure you're never more than a few clicks away from the game.
+            We focus on link redundancy. Every match on <strong>Soccer100</strong> is supported by multiple <strong>soccer streams</strong>, ensuring that even if one source fails, you have instant backups ready to go.
           </p>
         </div>
       </div>
