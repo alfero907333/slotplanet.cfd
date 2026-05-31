@@ -2,7 +2,7 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-brand: #00C950;
+  --color-brand: #f3a833;
 }
 
 :root {
@@ -30,13 +30,14 @@
 body {
   background-color: var(--bg-color);
   color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .theme-card {
   background-color: var(--card-bg);
   border-color: var(--border-color);
   color: var(--text-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .theme-card-hover:hover {
@@ -61,7 +62,23 @@ body {
   --tw-prose-headings: #111827;
   --tw-prose-links: #2563eb;
   --tw-prose-bold: #111827;
-  --tw-prose-bullets: #d1d5db;
+  --tw-prose-bullets: #4b5563;
+  --tw-prose-quotes: #111827;
+  --tw-prose-code: #111827;
+  --tw-prose-hr: #e5e7eb;
+  --tw-prose-th-borders: #d1d5db;
+}
+
+.prose {
+  --tw-prose-body: #d1d5db;
+  --tw-prose-headings: #ffffff;
+  --tw-prose-links: #f3a833;
+  --tw-prose-bold: #ffffff;
+  --tw-prose-bullets: #4b5563;
+  --tw-prose-quotes: #ffffff;
+  --tw-prose-code: #ffffff;
+  --tw-prose-hr: rgba(255, 255, 255, 0.1);
+  --tw-prose-th-borders: rgba(255, 255, 255, 0.1);
 }
 
 strong {

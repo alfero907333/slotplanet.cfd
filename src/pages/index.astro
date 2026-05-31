@@ -35,6 +35,50 @@ title="Soccer100: Best Free Soccer Streams & totalsportek Links"
 description="Watch live soccer streams on Soccer100. Get HD football coverage of Premier League & UCL with totalsportek style schedules and no sign-up fees."
 keywords="soccer100, soccer streams, totalsportek" >
 
+  <!-- Full Left Ad -->
+  <div class="fixed left-2 top-1/2 -translate-y-1/2 z-50 hidden xl:block">
+    <script is:inline>
+      atOptions = {
+        'key' : '343d429aa8328de60fca1bee7eb697f9',
+        'format' : 'iframe',
+        'height' : 300,
+        'width' : 160,
+        'params' : {}
+      };
+    </script>
+    <script is:inline src="https://www.highperformanceformat.com/343d429aa8328de60fca1bee7eb697f9/invoke.js"></script>
+  </div>
+
+  <!-- Full Right Ad -->
+  <div class="fixed right-2 top-1/2 -translate-y-1/2 z-50 hidden xl:block">
+    <script is:inline>
+      atOptions = {
+        'key' : '574927efc11532cadaaececbbe27295f',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script is:inline src="https://www.highperformanceformat.com/574927efc11532cadaaececbbe27295f/invoke.js"></script>
+  </div>
+
+  <!-- Mobile Top Ad -->
+  <div class="flex justify-center w-full py-4 xl:hidden">
+    <div class="theme-card p-2 rounded border border-[var(--border-color)] shadow-sm overflow-hidden">
+      <script is:inline>
+        atOptions = {
+          'key' : '343d429aa8328de60fca1bee7eb697f9',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script is:inline src="https://www.highperformanceformat.com/343d429aa8328de60fca1bee7eb697f9/invoke.js"></script>
+    </div>
+  </div>
+
   <div class="mx-auto mb-4 max-w-4xl">
     <div class="mx-3 space-y-8">
       <div class="relative overflow-hidden rounded-md bg-transparent text-center pt-8 mb-8">
@@ -139,6 +183,20 @@ keywords="soccer100, soccer streams, totalsportek" >
         )
       }
 
+      <div class="flex justify-center my-8">
+        <div class="theme-card p-2 rounded border border-[var(--border-color)] shadow-sm overflow-hidden">
+          <script is:inline>
+            atOptions = {
+              'key' : '238b5f051db1975ef0b45712e47b822b',
+              'format' : 'iframe',
+              'height' : 60,
+              'width' : 468,
+              'params' : {}
+            };
+          </script>
+          <script is:inline src="https://www.highperformanceformat.com/238b5f051db1975ef0b45712e47b822b/invoke.js"></script>
+        </div>
+      </div>
 
 <div class="theme-card rounded-xl p-4 shadow-xl border backdrop-blur-sm">
       <div id="no-matches-found" class="hidden py-10 text-center theme-text-secondary">
@@ -151,7 +209,7 @@ keywords="soccer100, soccer streams, totalsportek" >
           if (sport.league_schedule.length !== 0)
             return (
               <div class="mb-12 last:mb-0 sport-section" id={slugify(sport.sport)}>
-                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-2">
+                <div class="flex items-center gap-3 mb-6 border-b border-[var(--border-color)] pb-2">
                   <h2 class="text-2xl font-black theme-text-primary uppercase tracking-wider">
                     {sport.sport}
                   </h2>
@@ -197,64 +255,70 @@ keywords="soccer100, soccer streams, totalsportek" >
     return (
       <a
         href={`/live/${slugify(sport.sport)}/${slugify(`${event.teams}`)}/${event.sch_id}/`}
-        class="group grid grid-cols-3 items-center theme-card theme-card-hover transition-all duration-300 rounded-lg px-4 py-4 border shadow-md match-card"
+        class="group grid grid-cols-12 items-center theme-card theme-card-hover transition-all duration-300 rounded-lg px-3 py-4 sm:px-4 sm:py-5 border shadow-md match-card gap-2 sm:gap-4"
         data-search={`${displayHome} ${displayAway} ${event.sch_league}`.toLowerCase()}
       >
         {/* LEFT TEAM */}
-        <div class="flex items-center gap-3">
-          {event.sch_home_logo ? (
-            <img
-              src={event.sch_home_logo}
-              alt={translateSportsData(displayHome)}
-              class="w-12 h-12 object-contain drop-shadow-md"
-              loading="lazy"
-              decoding="async"
-              onerror="this.style.display='none'"
-             />
-           ) : (
-             <div class="w-12 h-12 flex items-center justify-center bg-neutral-500/10 rounded-full text-xl">
+        <div class="col-span-4 sm:col-span-4 flex items-center gap-2 sm:gap-3 min-w-0">
+          <div class="relative shrink-0">
+            {event.sch_home_logo ? (
+              <img
+                src={event.sch_home_logo}
+                alt={translateSportsData(displayHome)}
+                class="w-8 h-8 sm:w-12 sm:h-12 object-contain drop-shadow-md"
+                loading="lazy"
+                decoding="async"
+                onerror="this.style.display='none'"
+              />
+            ) : (
+              <div class="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center bg-neutral-500/10 rounded-full text-base sm:text-xl">
                 ⚽
-             </div>
-           )}
-          <span class="theme-text-primary font-bold text-base sm:text-lg tracking-wide">
+              </div>
+            )}
+          </div>
+          <span class="theme-text-primary font-bold text-xs sm:text-lg tracking-tight sm:tracking-wide leading-tight break-words overflow-hidden">
             {translateSportsData(displayHome)}
           </span>
         </div>
 
-        {/* CENTER */}
-        <div class="flex flex-col items-center text-center">
-          <span class="text-[10px] sm:text-xs text-[#f3a833] font-black uppercase tracking-[0.2em] mb-1">
+        {/* CENTER (Info/Time) */}
+        <div class="col-span-4 sm:col-span-4 flex flex-col items-center text-center px-1">
+          <span class="text-[7px] sm:text-xs text-[#f3a833] font-black uppercase tracking-tight sm:tracking-[0.2em] mb-0.5 sm:mb-1 leading-tight break-words">
             {translateSportsData(event.sch_league)}
           </span>
 
-          <span class="text-xl sm:text-2xl font-black theme-text-primary">
-           {translateSportsData(event.event_time)} 
-          </span>
+          <div class="flex items-center gap-1 sm:gap-2">
+            <span class="text-sm sm:text-2xl font-black theme-text-primary whitespace-nowrap">
+              {translateSportsData(event.event_time)}
+            </span>
+          </div>
 
-          <span class="text-[10px] sm:text-xs theme-text-secondary font-medium">
+          <span class="text-[7px] sm:text-xs theme-text-secondary font-medium whitespace-nowrap">
             {translateSportsData(event.event_date)}
           </span>
         </div>
 
         {/* RIGHT TEAM */}
-        <div class="flex items-center justify-end gap-3 text-right">
-          <span class="theme-text-primary font-bold text-base sm:text-lg tracking-wide">
+        <div class="col-span-4 sm:col-span-4 flex items-center justify-end gap-2 sm:gap-3 text-right min-w-0">
+          <span class="theme-text-primary font-bold text-xs sm:text-lg tracking-tight sm:tracking-wide leading-tight break-words overflow-hidden">
             {translateSportsData(displayAway)}
           </span>
-          {event.sch_away_logo ? (
-            <img
-              src={event.sch_away_logo}
-              alt={translateSportsData(displayAway)}
-              class="w-12 h-12 object-contain drop-shadow-md"
-              loading="lazy"
-              decoding="async"
-              onerror="this.style.display='none'"
-             />
-           ) : (
-             <div class="w-12 h-12 flex items-center justify-center bg-neutral-500/10 rounded-full text-xl">
+          <div class="relative shrink-0">
+            {event.sch_away_logo ? (
+              <img
+                src={event.sch_away_logo}
+                alt={translateSportsData(displayAway)}
+                class="w-8 h-8 sm:w-12 sm:h-12 object-contain drop-shadow-md"
+                loading="lazy"
+                decoding="async"
+                onerror="this.style.display='none'"
+              />
+            ) : (
+              <div class="w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center bg-neutral-500/10 rounded-full text-base sm:text-xl">
                 ⚽
-             </div>
-           )}
+              </div>
+            )}
+          </div>
         </div>
       </a>
     );
@@ -270,7 +334,7 @@ keywords="soccer100, soccer streams, totalsportek" >
       <!-- Guide Section -->
       <div class="theme-card rounded-xl p-6 border shadow-lg backdrop-blur-sm">
         <div class="theme-card p-6 rounded-lg mb-8 shadow-inner border">
-          <h3 class="flex items-center gap-2 font-bold text-xl mb-4 border-b border-white/10 pb-2 theme-text-primary">
+          <h3 class="flex items-center gap-2 font-bold text-xl mb-4 border-b border-[var(--border-color)] pb-2 theme-text-primary">
             📌 Soccer100 — Complete Guide to Free Soccer Streams
           </h3>
           <ul class="space-y-3 text-sm md:text-base font-medium theme-text-primary">
@@ -290,7 +354,7 @@ keywords="soccer100, soccer streams, totalsportek" >
             Whether you are following the tactical battles of the Premier League or the high-stakes drama of the Champions League, <strong>Soccer100</strong> ensures you are always in the front row. By aggregating the most dependable <strong>soccer streams</strong>, we provide a viewing experience that rivals and often exceeds traditional <strong>totalsportek</strong> mirrors, all while maintaining a user-friendly interface.
           </p>
 
-          <h2 id="about" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6">
+          <h2 id="about" class="text-3xl font-black text-[#f3a833] border-b border-[var(--border-color)] pb-3 mb-6">
             1. The Evolution of Soccer100
           </h2>
           <p class="mb-4 leading-relaxed">
@@ -306,33 +370,33 @@ keywords="soccer100, soccer streams, totalsportek" >
             </p>
           </div>
 
-          <h2 id="features" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6 mt-16">
+          <h2 id="features" class="text-3xl font-black text-[#f3a833] border-b border-[var(--border-color)] pb-3 mb-6 mt-16">
             2. Why Choose Soccer100 for Soccer Streams?
           </h2>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
+            <div class="theme-card p-6 rounded-xl shadow-lg border border-[var(--border-color)]">
               <h4 class="font-black text-lg mb-2 text-[#f3a833]">🚀 Next-Gen Servers</h4>
               <p class="text-sm theme-text-secondary leading-relaxed">Soccer100 utilizes high-bandwidth infrastructure to provide soccer streams that are faster and more stable than traditional totalsportek mirrors.</p>
             </div>
             
-            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
+            <div class="theme-card p-6 rounded-xl shadow-lg border border-[var(--border-color)]">
               <h4 class="font-black text-lg mb-2 text-[#f3a833]">📺 Elite HD Feeds</h4>
               <p class="text-sm theme-text-secondary leading-relaxed">Enjoy every goal in crystal-clear HD. Our soccer streams are optimized for visual fidelity, giving you a totalsportek level experience on any screen.</p>
             </div>
 
-            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
+            <div class="theme-card p-6 rounded-xl shadow-lg border border-[var(--border-color)]">
               <h4 class="font-black text-lg mb-2 text-[#f3a833]">🌍 Global Reach</h4>
               <p class="text-sm theme-text-secondary leading-relaxed">From the big leagues to niche tournaments, Soccer100 covers it all. We offer more variety in soccer streams than your average totalsportek clone.</p>
             </div>
 
-            <div class="theme-card p-6 rounded-xl shadow-lg border border-white/5">
+            <div class="theme-card p-6 rounded-xl shadow-lg border border-[var(--border-color)]">
               <h4 class="font-black text-lg mb-2 text-[#f3a833]">🛡️ Safe & Secure</h4>
               <p class="text-sm theme-text-secondary leading-relaxed">Your privacy matters. Unlike many totalsportek mirrors, Soccer100 is designed to be a safe environment for enjoying live soccer streams without intrusive tracking.</p>
             </div>
           </div>
 
-          <h2 id="leagues" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6 mt-16">
+          <h2 id="leagues" class="text-3xl font-black text-[#f3a833] border-b border-[var(--border-color)] pb-3 mb-6 mt-16">
             3. Global Coverage on Soccer100
           </h2>
           <p class="text-lg leading-relaxed mb-6">
@@ -368,7 +432,7 @@ keywords="soccer100, soccer streams, totalsportek" >
             Looking for something specific? Soccer100 also features streams for smaller leagues, youth competitions, and friendly matches, making us the most versatile <strong>soccer streams</strong> destination available.
           </p>
 
-          <h2 id="how-to-watch" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6 mt-16">
+          <h2 id="how-to-watch" class="text-3xl font-black text-[#f3a833] border-b border-[var(--border-color)] pb-3 mb-6 mt-16">
             4. Step-by-Step Guide to Soccer100
           </h2>
           <p class="text-lg mb-8">Streaming your favorite matches on Soccer100 is quick and easy. Just follow these simple steps:</p>
@@ -381,7 +445,7 @@ keywords="soccer100, soccer streams, totalsportek" >
               {step: "4", title: "Choose a Stream", desc: "Pick any of the provided HD links to start watching immediately. We provide several backups for your convenience."},
               {step: "5", title: "Enjoy the Game", desc: "Sit back and enjoy high-quality soccer streams on Soccer100, optimized for a perfect viewing experience on any screen."}
             ].map(item => (
-              <div class="theme-card p-5 rounded-xl shadow-md border border-white/10 flex items-center gap-4 text-left">
+              <div class="theme-card p-5 rounded-xl shadow-md border border-[var(--border-color)] flex items-center gap-4 text-left">
                 <div class="bg-[#f3a833] text-black w-10 h-10 rounded-full flex items-center justify-center font-black shrink-0">
                   {item.step}
                 </div>
@@ -392,7 +456,7 @@ keywords="soccer100, soccer streams, totalsportek" >
             ))}
           </div>
 
-          <h2 id="faq" class="text-3xl font-black text-[#f3a833] border-b border-white/10 pb-3 mb-6 mt-16">
+          <h2 id="faq" class="text-3xl font-black text-[#f3a833] border-b border-[var(--border-color)] pb-3 mb-6 mt-16">
             5. FAQ: Everything You Need to Know About Soccer100
           </h2>
           <div class="space-y-4 mb-16">
@@ -422,7 +486,7 @@ keywords="soccer100, soccer streams, totalsportek" >
                 a: "Soccer100 is designed to be safe for all users. We recommend using a modern browser and, for the best experience, an ad blocker to minimize interruptions while watching soccer streams."
               }
             ].map(item => (
-              <div class="theme-card p-6 rounded-xl shadow-md border border-white/10 text-left">
+              <div class="theme-card p-6 rounded-xl shadow-md border border-[var(--border-color)] text-left">
                 <h4 class="font-black text-[#f3a833] mb-2">{item.q}</h4>
                 <p class="theme-text-secondary text-sm leading-relaxed">{item.a}</p>
               </div>
@@ -436,51 +500,11 @@ keywords="soccer100, soccer streams, totalsportek" >
             </p>
           </div>
 
-          <!-- Latest from Blog -->
-          <div class="mt-16 mb-16">
-            <h2 class="text-3xl font-black theme-text-primary mb-8 text-center">
-              Latest from our <span class="text-[#f3a833]">Blog</span>
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  title: "Why Soccer100 is the Best Platform",
-                  url: "/blog/soccer100-best-live-streaming/",
-                  icon: "🚀"
-                },
-                {
-                  title: "How to Watch Streams for Free",
-                  url: "/blog/how-to-watch-soccer-streams-free/",
-                  icon: "💡"
-                },
-                {
-                  title: "Top Features of Soccer100",
-                  url: "/blog/top-features-soccer-streams-tv/",
-                  icon: "⭐"
-                }
-              ].map(post => (
-                <a href={post.url} class="theme-card p-6 rounded-xl border border-white/10 hover:border-[#f3a833]/50 transition-all group shadow-md">
-                  <div class="text-2xl mb-3">{post.icon}</div>
-                  <h3 class="font-bold theme-text-primary group-hover:text-[#f3a833] transition-colors mb-2">{post.title}</h3>
-                  <span class="text-[#f3a833] text-sm font-bold flex items-center gap-1">
-                    Read More 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </span>
-                </a>
-              ))}
-            </div>
-            <div class="text-center mt-8">
-              <a href="/blog/" class="inline-block px-6 py-2 border border-[#f3a833] text-[#f3a833] font-bold rounded-lg hover:bg-[#f3a833] hover:text-black transition-all">
-                View All Articles
-              </a>
-            </div>
           </div>
          </div>
        </div>
 
-      <div class="prose max-w-none rounded-xl theme-card border border-white/5 p-6 shadow-lg backdrop-blur-sm">
+      <div class="prose max-w-none rounded-xl theme-card border border-[var(--border-color)] p-6 shadow-lg backdrop-blur-sm">
         <div>
           <h2 class="text-[#f3a833]">Soccer100: The Future of Free Soccer Streams</h2>
           <p>

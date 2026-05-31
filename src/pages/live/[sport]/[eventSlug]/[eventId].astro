@@ -68,6 +68,20 @@ export const prerender = false;
   description={`Watch ${translateSportsData(displayHome)} vs ${translateSportsData(displayAway)} live stream free on Soccer100. Premium soccer streams for ${translateSportsData(league)} via totalsportek.`}
   keywords="soccer100, soccer streams, totalsportek"
 >
+  <!-- Full Left Ad -->
+  <div class="fixed left-2 top-1/2 -translate-y-1/2 z-50 hidden xl:block">
+    <script is:inline>
+      atOptions = {
+        'key' : '6a5a027902a4642e7f792ba4488f97cd',
+        'format' : 'iframe',
+        'height' : 600,
+        'width' : 160,
+        'params' : {}
+      };
+    </script>
+    <script is:inline src="https://www.highperformanceformat.com/6a5a027902a4642e7f792ba4488f97cd/invoke.js"></script>
+  </div>
+
   <div class="pt-10 px-4 max-w-3xl mx-auto text-left">
     <div
       class="space-y-6 text-center relative p-6 sm:p-8 rounded-2xl theme-card border border-white/10 shadow-2xl backdrop-blur-md"
@@ -99,6 +113,22 @@ export const prerender = false;
         >
           Watch Live Now
         </a>
+      </div>
+
+      <!-- Mobile Bottom Ad -->
+      <div class="flex justify-center w-full mt-8 xl:hidden">
+        <div class="theme-card p-2 rounded border border-[var(--border-color)] shadow-sm overflow-hidden">
+          <script is:inline>
+            atOptions = {
+              'key' : '6a5a027902a4642e7f792ba4488f97cd',
+              'format' : 'iframe',
+              'height' : 50,
+              'width' : 320,
+              'params' : {}
+            };
+          </script>
+          <script is:inline src="https://www.highperformanceformat.com/6a5a027902a4642e7f792ba4488f97cd/invoke.js"></script>
+        </div>
       </div>
 
       <div class="prose max-w-none text-left theme-text-primary">
