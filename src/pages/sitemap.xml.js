@@ -16,7 +16,8 @@ export const GET = async () => {
 
   const footerPages = [
     { loc: "/blog/", lastmod: now, priority: 0.5 },
-    { loc: "/blog/totalsportekz-alternative-2026/", lastmod: now, priority: 0.4 },
+    { loc: "/blog/soccer100-ultimate-guide-2026/", lastmod: now, priority: 0.6 },
+    { loc: "/blog/totalsportek-alternative-2026/", lastmod: now, priority: 0.4 },
     { loc: "/blog/best-soccer-streams-fifa-world-cup-2026/", lastmod: now, priority: 0.4 },
     { loc: "/blog/fifa-world-cup-2026-soccer100/", lastmod: now, priority: 0.4 },
     { loc: "/blog/best-soccer-streaming-sites-2026/", lastmod: now, priority: 0.4 },
