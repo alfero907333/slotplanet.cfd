@@ -28,18 +28,18 @@ const canonicalUrl = new URL(Astro.url.pathname, PUBLIC_BASE_URL);
     <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <meta property="og:title" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
     <meta property="og:type" content="website" />
     <meta name="msvalidate.01" content="BFFF0110E42A5E514F0526F2D5657C78" />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image:alt" content={SITE_NAME} />
+    <meta property="og:image:alt" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:video" content={canonicalUrl} />
     <meta property="og:image:type" content="image/jpeg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:title" content={SITE_NAME} />
+    <meta name="twitter:title" content={title} />
     <meta name="twitter:site" content={SITE_NAME} />
     <meta name="twitter:url" content={canonicalUrl} />
     <meta itemprop="image" content="/favicon.svg" />
