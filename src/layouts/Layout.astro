@@ -46,29 +46,25 @@ const canonicalUrl = new URL(Astro.url.pathname, PUBLIC_BASE_URL);
     <meta property="og:image" content="/favicon.svg" />
     <meta name="twitter:image" content="/favicon.svg" />
     
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Soccer100",
-        "url": "https://mismapas.xyz",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://mismapas.xyz/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": SITE_NAME,
+      "url": PUBLIC_BASE_URL,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${PUBLIC_BASE_URL}/?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
       }
-    </script>
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Soccer100",
-        "url": "https://mismapas.xyz",
-        "logo": "https://mismapas.xyz/favicon.svg",
-        "sameAs": []
-      }
-    </script>
+    })} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": SITE_NAME,
+      "url": PUBLIC_BASE_URL,
+      "logo": `${PUBLIC_BASE_URL}/favicon.svg`,
+      "sameAs": []
+    })} />
     <style is:global>
       @keyframes bounce-slow {
         0%, 100% { transform: translateY(0); }

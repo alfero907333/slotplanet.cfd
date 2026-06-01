@@ -60,13 +60,26 @@ const translateSportsData = (str: string) => {
   return translated;
 };
 
+const cleanTeams = translateSportsData(teams);
+const cleanLeague = translateSportsData(league);
+
+let pageTitle = `${cleanTeams} Live Stream | Soccer100`;
+if (pageTitle.length > 60) {
+  pageTitle = `${cleanTeams} Live | Soccer100`.slice(0, 60);
+}
+
+let pageDesc = `Stream ${cleanTeams} live on Soccer100. Get free soccer streams and reliable totalsportek links in HD quality for the ${cleanLeague} match.`;
+if (pageDesc.length > 160) {
+  pageDesc = `Watch ${cleanTeams} live on Soccer100. Premium soccer streams and totalsportek links in HD quality. Free online.`.slice(0, 160);
+}
+
 export const prerender = false;
 ---
 
 <Layout
-  title={`Watch ${translateSportsData(teams)} Live | Soccer100 Streams & Totalsportek`}
-  description={`Stream ${translateSportsData(teams)} live on Soccer100. Free soccer streams for ${translateSportsData(league)} with reliable totalsportek mirror links in HD quality.`}
-  keywords={`soccer100, soccer streams, totalsportek, ${translateSportsData(teams)} live, ${translateSportsData(league)} stream`}
+  title={pageTitle}
+  description={pageDesc}
+  keywords={`soccer100, soccer streams, totalsportek, ${cleanTeams} live, ${cleanLeague} stream`}
 >
   <!-- Full Left Ad -->
   <div class="fixed left-2 top-1/2 -translate-y-1/2 z-50 hidden xl:block">
@@ -133,51 +146,51 @@ export const prerender = false;
 
       <div class="prose max-w-none theme-text-primary">
         <p class="text-lg leading-relaxed mb-6">
-          Are you looking for a way to watch <strong>{translateSportsData(displayHome)} vs {translateSportsData(displayAway)}</strong>? You are in the right place. <strong>Soccer100</strong> offers the most reliable <strong>soccer streams</strong> for this <strong>{translateSportsData(league)}</strong> match, giving you a <strong>totalsportek</strong> level of quality without the usual lag.
+          Catch the highly anticipated matchup between <strong>{translateSportsData(displayHome)} and {translateSportsData(displayAway)}</strong>. On <strong>Soccer100</strong>, we offer highly optimized, fast <strong>soccer streams</strong> so you can follow every pass, tackle, and goal of this <strong>{translateSportsData(league)}</strong> fixture without delay. We deliver standard <strong>totalsportek</strong> styling with vastly improved server speeds.
         </p>
         <p class="text-lg leading-relaxed mb-10">
-          As the game is about to start, <strong>Soccer100</strong> is ready with several high-definition <strong>soccer streams</strong>. We know fans want fast and clear links, which is why our <strong>totalsportek</strong> style mirrors are optimized to work perfectly on any device.
+          Prepare for kickoff with our verified selection of high-definition broadcasting mirrors. As fans worldwide search for secure channels, <strong>Soccer100</strong> acts as the ultimate hub, hosting multiple active <strong>soccer streams</strong> and redundant <strong>totalsportek</strong> mirrors so you never get interrupted during key plays.
         </p>
 
         <h2 class="text-3xl font-black text-[#f3a833] border-b border-[var(--border-color)] pb-3 mb-6">
-          Match Info: {translateSportsData(displayHome)} vs {translateSportsData(displayAway)}
+          Event Details: {translateSportsData(displayHome)} vs {translateSportsData(displayAway)}
         </h2>
         <p class="mb-4 leading-relaxed">
-          This <strong>{translateSportsData(league)}</strong> game is one of the most exciting matches of the week. Whether you're a big fan or just want to watch some football, our <strong>soccer streams</strong> make sure you don't miss any of the action. <strong>Soccer100</strong> is your best hub for <strong>totalsportek</strong> style football links.
+          This crucial <strong>{translateSportsData(league)}</strong> event is set to deliver amazing football action. Rather than wrestling with slow feeds or spam-heavy portals, use <strong>Soccer100</strong> to enjoy direct, clean <strong>soccer streams</strong>. Our service works as a seamless, high-speed directory that replicates classic <strong>totalsportek</strong> lists without the frustration.
         </p>
         <p class="leading-relaxed">
-          The kickoff is at <strong>{translateSportsData(event_date_time)} ET</strong>, so make sure you're on <strong>Soccer100</strong>. We provide backup <strong>soccer streams</strong> so that if one link stops, you can quickly switch to another and keep watching.
+          The action starts live at <strong>{translateSportsData(event_date_time)} ET</strong>. Make sure you load <strong>Soccer100</strong> early to test the active live streams. We supply reliable backup channels, enabling you to switch mirrors immediately in case of any local network latency.
         </p>
 
         <div class="theme-card p-5 rounded-lg my-8 border-l-4 border-[#f3a833] shadow-sm">
           <p class="font-bold leading-relaxed">
-            <span class="text-[#f3a833]">💡 Quick Tip:</span> Open the <span class="text-[#f3a833]">soccer stream</span> on <span class="text-[#f3a833]">Soccer100</span> a few minutes before kickoff to ensure you have a stable connection for the whole match.
+            <span class="text-[#f3a833]">⚽ Pro Tip:</span> Join the <span class="text-[#f3a833]">soccer stream</span> on <span class="text-[#f3a833]">Soccer100</span> about five minutes before kickoff to guarantee a fully synchronized, buffer-free connection.
           </p>
         </div>
 
         <h2 class="text-3xl font-black text-[#f3a833] border-b border-[var(--border-color)] pb-3 mb-6 mt-16">
-          Why Fans Use Soccer100
+          Key Benefits of Soccer100
         </h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
           <div class="theme-card p-6 rounded-xl shadow-lg border border-[var(--border-color)]">
-            <h4 class="font-black text-lg mb-2 text-[#f3a833]">⭐ Tested Links</h4>
-            <p class="text-sm theme-text-secondary leading-relaxed">We check all our soccer streams to make sure they are working, providing a better experience than most totalsportek mirrors.</p>
+            <h4 class="font-black text-lg mb-2 text-[#f3a833]">⭐ Fully Curated Links</h4>
+            <p class="text-sm theme-text-secondary leading-relaxed">Every stream link undergoes active testing. We prune broken links, offering higher stability than typical totalsportek aggregators.</p>
           </div>
           
           <div class="theme-card p-6 rounded-xl shadow-lg border border-[var(--border-color)]">
-            <h4 class="font-black text-lg mb-2 text-[#f3a833]">💎 HD Streaming</h4>
-            <p class="text-sm theme-text-secondary leading-relaxed">Watch the game in clear HD. Our soccer streams are selected for their high video quality.</p>
+            <h4 class="font-black text-lg mb-2 text-[#f3a833]">💎 Ultra HD Broadcasts</h4>
+            <p class="text-sm theme-text-secondary leading-relaxed">Watch every minute of the action in high resolution. Our curated soccer streams prioritize maximum visual clarity.</p>
           </div>
 
           <div class="theme-card p-6 rounded-xl shadow-lg border border-[var(--border-color)]">
-            <h4 class="font-black text-lg mb-2 text-[#f3a833]">📱 Mobile Ready</h4>
-            <p class="text-sm theme-text-secondary leading-relaxed">Whether you're on a phone or a computer, Soccer100 gives you the best soccer streams for a smooth experience.</p>
+            <h4 class="font-black text-lg mb-2 text-[#f3a833]">📱 Multi-Device Comfort</h4>
+            <p class="text-sm theme-text-secondary leading-relaxed">Enjoy full compatibility. Soccer100 delivers crisp soccer streams optimized for computers, smartphones, and tablets.</p>
           </div>
 
           <div class="theme-card p-6 rounded-xl shadow-lg border border-[var(--border-color)]">
-            <h4 class="font-black text-lg mb-2 text-[#f3a833]">🔒 Safe to Watch</h4>
-            <p class="text-sm theme-text-secondary leading-relaxed">You can watch safely on Soccer100. Our platform is built to be a secure place for all your totalsportek needs.</p>
+            <h4 class="font-black text-lg mb-2 text-[#f3a833]">🔒 Safe Environment</h4>
+            <p class="text-sm theme-text-secondary leading-relaxed">Your streaming security is vital. Soccer100 is engineered with clean, modern protocols for a safer totalsportek experience.</p>
           </div>
         </div>
 
@@ -186,23 +199,23 @@ export const prerender = false;
         </h2>
         <div class="space-y-4 mb-16">
           <div class="theme-card p-6 rounded-xl shadow-md border border-[var(--border-color)] text-left">
-            <h4 class="font-black text-[#f3a833] mb-2">How can I watch {translateSportsData(displayHome)} vs {translateSportsData(displayAway)} for free?</h4>
-            <p class="theme-text-secondary text-sm leading-relaxed">Just visit Soccer100, find the match in the schedule, and pick one of the available HD soccer streams.</p>
+            <h4 class="font-black text-[#f3a833] mb-2">How can I stream {translateSportsData(displayHome)} vs {translateSportsData(displayAway)} for free?</h4>
+            <p class="theme-text-secondary text-sm leading-relaxed">Simply visit Soccer100, head to today's schedule, click on this event, and select any of the high-speed HD soccer streams.</p>
           </div>
           <div class="theme-card p-6 rounded-xl shadow-md border border-[var(--border-color)] text-left">
-            <h4 class="font-black text-[#f3a833] mb-2">Is Soccer100 a good alternative to totalsportek?</h4>
-            <p class="theme-text-secondary text-sm leading-relaxed">Yes, Soccer100 provides more stable soccer streams and a cleaner look than most other totalsportek mirrors.</p>
+            <h4 class="font-black text-[#f3a833] mb-2">Is Soccer100 a direct totalsportek alternative?</h4>
+            <p class="theme-text-secondary text-sm leading-relaxed">Yes, Soccer100 represents a modern, clutter-free upgrade, listing faster soccer streams and a vastly superior mobile interface.</p>
           </div>
           <div class="theme-card p-6 rounded-xl shadow-md border border-[var(--border-color)] text-left">
-            <h4 class="font-black text-[#f3a833] mb-2">Do I need to register to watch?</h4>
-            <p class="theme-text-secondary text-sm leading-relaxed">No, you don't need an account. You can watch all our soccer streams instantly and for free.</p>
+            <h4 class="font-black text-[#f3a833] mb-2">Are registration details required?</h4>
+            <p class="theme-text-secondary text-sm leading-relaxed">No, all soccer streams are openly accessible. You do not need to create an account or provide payment info.</p>
           </div>
         </div>
 
         <div class="theme-card p-10 rounded-2xl text-center shadow-2xl mb-16 border border-white/5">
-          <h2 class="text-4xl font-black mb-6">Experience the Game on Soccer100</h2>
+          <h2 class="text-4xl font-black mb-6">Enjoy the Match on Soccer100</h2>
           <p class="text-lg leading-relaxed max-w-2xl mx-auto opacity-90">
-            Join thousands of fans watching <strong>{translateSportsData(displayHome)} vs {translateSportsData(displayAway)}</strong> live. <strong>Soccer100</strong> is your trusted source for premium <strong>soccer streams</strong> and <strong>totalsportek</strong> level coverage.
+            Join sports fans streaming <strong>{translateSportsData(displayHome)} vs {translateSportsData(displayAway)}</strong> live. <strong>Soccer100</strong> is your home for free, high-performance <strong>soccer streams</strong> and stable <strong>totalsportek</strong> matches.
           </p>
         </div>
       </div>
