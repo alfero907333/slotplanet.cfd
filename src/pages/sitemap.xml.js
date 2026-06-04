@@ -12,12 +12,18 @@ export const GET = async () => {
   const now = new Date().toISOString();
 
   // Static pages (built-in)
-  const staticPages = [{ loc: "/", lastmod: now, priority: 1 }];
+  const staticPages = [
+    { loc: "/", lastmod: now, priority: 1 },
+    { loc: "/methstreams/", lastmod: now, priority: 0.8 },
+    { loc: "/crackstreams/", lastmod: now, priority: 0.8 },
+    { loc: "/buffstreams/", lastmod: now, priority: 0.8 },
+    { loc: "/totalsportek/", lastmod: now, priority: 0.8 },
+  ];
 
   const footerPages = [
     { loc: "/blog/", lastmod: now, priority: 0.5 },
     { loc: "/blog/soccer100-ultimate-guide-2026/", lastmod: now, priority: 0.6 },
-    { loc: "/blog/totalsportek-alternative-2026/", lastmod: now, priority: 0.4 },
+    { loc: "/blog/footybite-alternative-2026/", lastmod: now, priority: 0.4 },
     { loc: "/blog/best-soccer-streams-fifa-world-cup-2026/", lastmod: now, priority: 0.4 },
     { loc: "/blog/fifa-world-cup-2026-soccer100/", lastmod: now, priority: 0.4 },
     { loc: "/blog/best-soccer-streaming-sites-2026/", lastmod: now, priority: 0.4 },

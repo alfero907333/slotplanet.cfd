@@ -1,0 +1,198 @@
+---
+import Layout from "../layouts/Layout.astro";
+import slugify from "../utils/slugify";
+
+let allSports = [];
+try {
+  const res = await fetch(`https://spanelv2.andrhino.com/api/v2/appscheduleapi`);
+  if (res.ok) {
+    const data = await res.json();
+    allSports = data[0].schedule.slice(0, 1);
+  }
+} catch (error) {
+  console.error("Error fetching schedule:", error);
+}
+
+const keyword = "Crackstreams";
+const domain = "betwoon.cfd";
+
+export const prerender = false;
+---
+
+<Layout
+  title="Best Crackstreams Alternatives 2026 – Free HD Sports Streams"
+  description="Looking for the best Crackstreams alternatives in 2026? Watch free NFL, NBA, Premier League, UFC, Boxing and more in HD quality with low ads."
+  keywords="crackstreams alternatives, best crackstreams alternatives 2026, free hd sports streams, watch nfl free, watch nba free, watch ufc free"
+>
+  <div class="mx-auto max-w-4xl px-4 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl sm:text-6xl font-black theme-text-primary mb-6">
+        Best <span class="text-[#f3a833]">Crackstreams</span> Alternatives 2026 – Free Live HD Sports Streaming
+      </h1>
+      
+      <div class="space-y-6 text-lg theme-text-secondary max-w-3xl mx-auto leading-relaxed">
+        <p>
+          Crackstreams was once very popular, but in 2026 it is frequently down, has too many ads, and streams often get blocked. That’s why people are actively searching for reliable Crackstreams alternatives.
+        </p>
+      </div>
+
+      <div class="mt-10">
+        <a 
+          href="/" 
+          class="inline-block px-10 py-5 bg-[#f3a833] text-black font-black rounded-xl text-2xl transition-all hover:bg-[#e29722] hover:scale-105 shadow-2xl"
+        >
+          WATCH LIVE NOW →
+        </a>
+      </div>
+    </div>
+
+    <!-- Live Matches Placeholder Section -->
+    <div class="theme-card rounded-2xl p-6 mb-16 border shadow-2xl backdrop-blur-md">
+      <div class="flex items-center justify-between mb-8 border-b border-[var(--border-color)] pb-4">
+        <h2 class="text-3xl font-black theme-text-primary uppercase tracking-wider">
+          Live Sports Schedule
+        </h2>
+        <span class="animate-pulse bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">
+          Live Now
+        </span>
+      </div>
+
+      <div class="space-y-4">
+        {allSports.length > 0 ? (
+          allSports[0].league_schedule.slice(0, 5).map((event: any) => (
+            <div class="group grid grid-cols-12 items-center theme-card theme-card-hover transition-all duration-300 rounded-xl px-4 py-5 border shadow-md gap-4">
+              <div class="col-span-4 flex items-center gap-3">
+                <span class="theme-text-primary font-bold text-sm sm:text-lg">{event.strHomeTeam || event.teams.split(' vs ')[0]}</span>
+              </div>
+              <div class="col-span-4 flex flex-col items-center text-center">
+                <span class="text-[10px] text-[#f3a833] font-black uppercase tracking-widest mb-1">{event.sch_league}</span>
+                <span class="text-xl font-black theme-text-primary">VS</span>
+              </div>
+              <div class="col-span-4 flex items-center justify-end gap-3 text-right">
+                <span class="theme-text-primary font-bold text-sm sm:text-lg">{event.strAwayTeam || event.teams.split(' vs ')[1]}</span>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div class="text-center py-10 theme-text-secondary">
+            <p>Loading today's live sports matches...</p>
+          </div>
+        )}
+      </div>
+      
+      <div class="text-center mt-8">
+        <a href="/" class="text-[#f3a833] font-bold hover:underline transition-all">
+          View All Live Matches on Homepage
+        </a>
+      </div>
+    </div>
+
+    <!-- Alternatives Table -->
+    <div class="mb-16 overflow-x-auto">
+      <h2 class="text-3xl font-black theme-text-primary mb-6">Top 8 Best Crackstreams Alternatives 2026</h2>
+      <table class="w-full text-left border-collapse theme-card rounded-xl overflow-hidden border shadow-xl">
+        <thead class="bg-[#f3a833] text-black">
+          <tr>
+            <th class="p-4 font-black">Rank</th>
+            <th class="p-4 font-black">Website</th>
+            <th class="p-4 font-black">Best For</th>
+            <th class="p-4 font-black">Quality</th>
+            <th class="p-4 font-black">Ads</th>
+            <th class="p-4 font-black">Score</th>
+          </tr>
+        </thead>
+        <tbody class="theme-text-primary">
+          <tr class="border-b border-[var(--border-color)]">
+            <td class="p-4 font-bold">1</td>
+            <td class="p-4 text-[#f3a833] font-bold">Betwoon.cfd</td>
+            <td class="p-4">All Sports</td>
+            <td class="p-4">HD 1080p</td>
+            <td class="p-4">Very Low</td>
+            <td class="p-4 font-black text-xl">9.6</td>
+          </tr>
+          <tr class="border-b border-[var(--border-color)]">
+            <td class="p-4 font-bold">2</td>
+            <td class="p-4">BeinMatch</td>
+            <td class="p-4">Soccer & NFL</td>
+            <td class="p-4">HD</td>
+            <td class="p-4">Low</td>
+            <td class="p-4 font-black text-xl">9.1</td>
+          </tr>
+          <tr class="border-b border-[var(--border-color)]">
+            <td class="p-4 font-bold">3</td>
+            <td class="p-4">Streameast</td>
+            <td class="p-4">NBA, NFL & UFC</td>
+            <td class="p-4">HD</td>
+            <td class="p-4">Medium</td>
+            <td class="p-4 font-black text-xl">8.8</td>
+          </tr>
+          <tr class="border-b border-[var(--border-color)]">
+            <td class="p-4 font-bold">4</td>
+            <td class="p-4">Sportsurge</td>
+            <td class="p-4">Multi Sports</td>
+            <td class="p-4">HD</td>
+            <td class="p-4">Low</td>
+            <td class="p-4 font-black text-xl">8.5</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Article Sections -->
+    <div class="prose prose-invert max-w-none theme-text-primary mb-16">
+      <h2 class="text-3xl font-black text-[#f3a833]">1. Betwoon.cfd (Best Crackstreams Alternative)</h2>
+      <p class="text-lg leading-relaxed">
+        Betwoon.cfd is currently the top Crackstreams alternative in 2026. It offers a clean interface, fast loading, minimum ads, and high-quality HD streams. You can watch Premier League, Champions League, NFL, NBA, UFC, and Boxing matches without any hassle. The site works smoothly on both desktop and mobile.
+      </p>
+
+      <h2 class="text-3xl font-black text-[#f3a833] mt-12">How to Watch Safely</h2>
+      <ul class="space-y-4">
+        <li class="flex items-center gap-3">
+          <span class="text-[#f3a833] text-xl">✓</span> Use a good VPN (ExpressVPN or NordVPN recommended)
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="text-[#f3a833] text-xl">✓</span> Install an ad blocker
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="text-[#f3a833] text-xl">✓</span> Keep antivirus active
+        </li>
+      </ul>
+
+      <h2 class="text-3xl font-black text-[#f3a833] mt-12">Frequently Asked Questions</h2>
+      <div class="space-y-6">
+        <div class="theme-card p-6 rounded-xl border">
+          <p class="font-bold text-xl mb-2">Is Crackstreams still working in 2026?</p>
+          <p class="theme-text-secondary">It is very unreliable now. Many domains are blocked or contain too many ads.</p>
+        </div>
+        <div class="theme-card p-6 rounded-xl border">
+          <p class="font-bold text-xl mb-2">Is Betwoon.cfd safe?</p>
+          <p class="theme-text-secondary">Yes, it is one of the most trusted options currently with minimal ads and high-quality streams.</p>
+        </div>
+      </div>
+
+      <h2 class="text-3xl font-black text-[#f3a833] mt-12">Conclusion</h2>
+      <p class="text-lg leading-relaxed">
+        If you are looking for the best Crackstreams alternative, visit <strong>Betwoon.cfd</strong> right now and enjoy uninterrupted sports streaming.
+      </p>
+    </div>
+
+    <!-- Final Call to Action -->
+    <div class="theme-card p-12 rounded-3xl text-center shadow-2xl border border-white/5 bg-gradient-to-b from-white/5 to-transparent">
+      <h2 class="text-4xl font-black mb-6 theme-text-primary">Don't Miss Another Second of the Action</h2>
+      <p class="text-xl theme-text-secondary mb-10 max-w-2xl mx-auto">
+        Whether it's the playoffs or a regular-season game, Soccer100 has you covered. Get direct access to the fastest sports feeds online right now.
+      </p>
+      <a 
+        href="/" 
+        class="inline-block px-12 py-6 bg-[#f3a833] text-black font-black rounded-2xl text-3xl transition-all hover:bg-[#e29722] hover:scale-105 shadow-2xl"
+      >
+        GO TO SOCCER100 NOW
+      </a>
+      <div class="mt-8">
+        <a href="/" class="theme-text-secondary hover:text-[#f3a833] transition-colors font-medium">
+          ← Return to Soccer100 Homepage
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>
