@@ -63,14 +63,14 @@ const translateSportsData = (str: string) => {
 const cleanTeams = translateSportsData(teams);
 const cleanLeague = translateSportsData(league);
 
-let pageTitle = `${cleanTeams} Live Stream - Rojadirecta & FootyBite`;
+let pageTitle = `${cleanTeams} Live Stream — Rojadirecta & FootyBite Coverage`;
 if (pageTitle.length > 60) {
-  pageTitle = `${cleanTeams} Live - Rojadirecta & FootyBite`.slice(0, 60);
+  pageTitle = `${cleanTeams} Live — Rojadirecta & FootyBite`.slice(0, 60);
 }
 
-let pageDesc = `Watch ${cleanTeams} live on Rojadirecta & FootyBite. Get free soccer streams and reliable sports alternative links in HD for the ${cleanLeague} match.`;
+let pageDesc = `Watch ${cleanTeams} live on Rojadirecta & FootyBite. Get reliable Soccer Streams in HD quality. No signup required for the best football streaming experience.`;
 if (pageDesc.length > 160) {
-  pageDesc = `Watch ${cleanTeams} live on Rojadirecta & FootyBite. Premium sports streams and alternatives in HD quality. Free online.`.slice(0, 160);
+  pageDesc = `Watch ${cleanTeams} live on Rojadirecta & FootyBite. HD Soccer Streams with no signup required. The best football streaming experience online.`.slice(0, 160);
 }
 
 export const prerender = false;
