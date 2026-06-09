@@ -3,11 +3,7 @@ export const prerender = false;
 import slugify from "../utils/slugify";
 
 export const GET = async () => {
-  const PUBLIC_BASE_URL = import.meta.env.PUBLIC_BASE_URL;
-
-  if (!PUBLIC_BASE_URL) {
-    return new Response("PUBLIC_BASE_URL not configured", { status: 500 });
-  }
+  const PUBLIC_BASE_URL = import.meta.env.PUBLIC_BASE_URL || "https://SmartBahIs.cfd";
 
   const now = new Date().toISOString();
 
