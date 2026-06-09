@@ -3,7 +3,7 @@ export const prerender = false;
 import slugify from "../utils/slugify";
 
 export const GET = async () => {
-  const PUBLIC_BASE_URL = import.meta.env.PUBLIC_BASE_URL || "https://slotplanet.cfd";
+  const PUBLIC_BASE_URL = import.meta.env.PUBLIC_BASE_URL || "https://SmartBahIs.cfd";
 
   const now = new Date().toISOString();
 
