@@ -1,5 +1,5 @@
 ---
-const SITE_NAME = "Soccer100";
+const SITE_NAME = "Rojadirecta";
 import slugify from "../../utils/slugify";
 
 let sports = [];
@@ -24,27 +24,45 @@ try {
   <div class="mx-3">
     <div class="mx-auto max-w-4xl flex items-center justify-between gap-4 py-2 border-b border-[var(--border-color)]">
       <div class="flex items-center gap-4">
-        <a href="/" class="text-xl font-bold bg-[#f3a833] px-4 py-2 rounded-md text-black flex items-center gap-2">
-            <span>{SITE_NAME}</span>
+        <a href="/" class="group flex items-center gap-3 transition-transform hover:scale-105">
+            <div class="bg-[#f3a833] p-2 rounded-xl shadow-[0_0_20px_rgba(243,168,51,0.3)] group-hover:shadow-[0_0_30px_rgba(243,168,51,0.5)] transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                <path d="M4 22h16"></path>
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+              </svg>
+            </div>
+            <span class="text-2xl font-black tracking-tighter theme-text-primary italic uppercase">
+              Roja<span class="text-[#f3a833]">directa</span>
+            </span>
           </a>
         </div>
         
         <div class="flex items-center gap-4">
           <button
             id="theme-toggle"
-            class="relative h-10 w-10 flex items-center justify-center rounded-xl transition-all duration-300 focus:outline-none bg-slate-800 hover:bg-slate-700 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-700 shadow-lg group"
-            aria-label="Toggle Theme"
+            class="theme-toggle"
+            type="button"
+            aria-label="Switch to light mode"
+            aria-pressed="false"
           >
-            <!-- The Split Circle Icon -->
-            <div class="relative w-5 h-5 rounded-full overflow-hidden border border-slate-600 shadow-sm transition-transform duration-500 group-hover:scale-110">
-              <!-- Dark side (Moon) -->
-              <div class="absolute inset-0 w-1/2 bg-purple-600"></div>
-              <!-- Light side (Sun) -->
-              <div class="absolute inset-0 left-1/2 w-1/2 bg-yellow-400"></div>
-            </div>
-            
-            <!-- Tooltip or subtle indicator (optional) -->
-            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#f3a833] opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            <span class="theme-toggle-track" aria-hidden="true">
+              <span class="theme-toggle-icon theme-toggle-icon-sun">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0-16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1Zm0 18a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM4.22 5.64a1 1 0 0 1 1.42 0l1.4 1.41a1 1 0 0 1-1.41 1.42l-1.41-1.42a1 1 0 0 1 0-1.41Zm12.73 12.73a1 1 0 0 1 1.41 0l1.42 1.41a1 1 0 0 1-1.42 1.42l-1.41-1.42a1 1 0 0 1 0-1.41ZM20 11a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2h2ZM6 11a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2h2Zm13.78-5.36a1 1 0 0 1 0 1.41l-1.42 1.42a1 1 0 0 1-1.41-1.42l1.41-1.41a1 1 0 0 1 1.42 0ZM7.05 18.37a1 1 0 0 1 0 1.41l-1.41 1.42a1 1 0 1 1-1.42-1.42l1.42-1.41a1 1 0 0 1 1.41 0Z"/>
+                </svg>
+              </span>
+              <span class="theme-toggle-icon theme-toggle-icon-moon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M21 12.79A9 9 0 0 1 11.21 3c0-.45.04-.89.1-1.32a1 1 0 0 0-1.37-1.07A10 10 0 1 0 23.39 14.06 1 1 0 0 0 22.32 12.7c-.43.06-.87.09-1.32.09Z"/>
+                </svg>
+              </span>
+              <span class="theme-toggle-thumb"></span>
+            </span>
+            <span class="theme-toggle-label">Dark</span>
           </button>
         </div>
 
@@ -61,15 +79,22 @@ try {
     </div>
 
     {sports.length > 0 && (
-      <div class="mx-auto max-w-4xl py-2 overflow-x-auto no-scrollbar scroll-smooth">
-        <div class="flex items-center gap-2 whitespace-nowrap px-1">
+      <div class="mx-auto max-w-4xl py-3 overflow-x-auto no-scrollbar scroll-smooth">
+        <div class="flex items-center gap-3 whitespace-nowrap px-1">
           {sports.map((sport) => (
-            <a href={`/#${slugify(sport.sport)}`} class="px-5 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider border border-[var(--border-color)] theme-card hover:border-[#f3a833] hover:text-[#f3a833] transition-all shadow-sm">
+            <a 
+              href={`/#${slugify(sport.sport)}`} 
+              class="relative px-6 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-widest border border-white/5 theme-card hover:border-[#f3a833]/50 hover:bg-[#f3a833] hover:text-black hover:scale-105 transition-all duration-300 shadow-lg flex items-center gap-2 group overflow-hidden"
+            >
+              <span class="w-2 h-2 rounded-full bg-[#f3a833] group-hover:bg-black transition-colors animate-pulse"></span>
               {sport.sport}
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
             </a>
           ))}
-          <a href="/blog/" class="px-5 py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider border border-[#f3a833] text-[#f3a833] theme-card hover:bg-[#f3a833] hover:text-black transition-all shadow-sm">
+          <a href="/blog/" class="px-6 py-2.5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-widest border border-[#f3a833] text-[#f3a833] theme-card hover:bg-[#f3a833] hover:text-black hover:scale-105 transition-all duration-300 shadow-lg flex items-center gap-2 group overflow-hidden">
+            <span class="w-2 h-2 rounded-full bg-[#f3a833] group-hover:bg-black transition-colors animate-pulse"></span>
             Blog
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
           </a>
         </div>
       </div>
@@ -80,14 +105,35 @@ try {
 <style>
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  
+  @keyframes shimmer {
+    100% { transform: translateX(100%); }
+  }
+  .animate-shimmer {
+    animation: shimmer 1.5s infinite;
+  }
 </style>
 
 <script is:inline>
   const t = document.getElementById('theme-toggle');
+  const themeLabel = t?.querySelector('.theme-toggle-label');
+
+  const syncThemeToggle = () => {
+    if (!t || !themeLabel) return;
+
+    const isLight = document.documentElement.classList.contains('light');
+    t.setAttribute('aria-pressed', String(isLight));
+    t.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+    themeLabel.textContent = isLight ? 'Light' : 'Dark';
+  };
+
+  syncThemeToggle();
+
   if (t) {
     t.addEventListener('click', () => {
       document.documentElement.classList.toggle('light');
       localStorage.setItem('theme', document.documentElement.classList.contains('light') ? 'light' : 'dark');
+      syncThemeToggle();
     });
   }
 </script>

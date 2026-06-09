@@ -11,8 +11,8 @@
     "enabled": true
   },
   "vars": {
-    "SITE_NAME": "Soccer100",
+    "SITE_NAME": "Rojadirecta",
     "API": "https://panel.sportsmerge.org/api/v1",
-    "PUBLIC_BASE_URL": "https://betwoon.cfd"
+    "PUBLIC_BASE_URL": "https://slotplanet.cfd"
   }
 }
